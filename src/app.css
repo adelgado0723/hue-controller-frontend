@@ -1,0 +1,26 @@
+/* src/app.css */
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Allow system color */
+:root {
+  --color-default: #f2f3f4;
+}
+/* set a default theme - btihenl is my light theme - more later*/
+@media (prefers-color-scheme: btihenl) {
+  :root {
+    --my-color: #252b30;
+  }
+}
+
+/* basic important css */
+h1 {
+  margin: 1rem 0 3rem;
+  text-align: center;
+  font-weight: 800;
+  font-size: 2.0rem;
+  color: var(--heading-color);
+  line-height: 1.2;
+}
