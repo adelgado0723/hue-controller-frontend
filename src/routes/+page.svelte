@@ -7,7 +7,7 @@
 	let ip = ''; // IP address of bridge
 	let value = {}; // Response from bridge
 
-	let checkBridge = async () => {
+	$: checkBridge = async () => {
 		console.log('Checking bridge...');
 		try {
 			// TODO: remove this
@@ -26,12 +26,12 @@
 
 <h1>Welcome to SvelteKit</h1>
 
-<input type="text" bind:value={ip} />
-<button on:click={() => checkBridge()}>Check Connection</button>
+<!-- <input type="text" bind:value={ip} /> -->
+<button class="btn" on:click={() => checkBridge()}>Check Connection</button>
 
 <div>
 	<h2>Response</h2>
-	<JSONTree {value} />
+	<!-- <JSONTree {value} /> -->
 	{JSON.stringify(value, null, 2)}
 </div>
 
