@@ -35,7 +35,8 @@ const config = {
           error: "#b53729",
           "code-bg-color": "#f1db85",
         },
-      }
+      },
+      "dracula"
     ],
   },
 	plugins: [require("daisyui")]
