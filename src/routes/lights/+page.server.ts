@@ -9,21 +9,29 @@ export interface light {
 }
 export const load: PageServerLoad = (async ({ fetch }) => {
   try {
-    console.log("executing api call...")
+    console.log('executing api call...');
     const headers = new Headers();
-    headers.set("hue-application-key", BRIDGE_USERNAME)
+    headers.set('hue-application-key', BRIDGE_USERNAME);
 
     const options = {
       method: 'GET',
-      headers,
-    }
+      headers
+    };
 
     const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/light`, options);
 
-    console.log(await res.json())
+    const data = await res.json();
+    console.log(data?.data);
 
-    return { lights: await res.json() };
-
+    const lights = data?.data?.map((light: any) => {
+      return {
+        id: light?.id,
+        name: light?.metadata?.name,
+        type: light?.metadata?.archetype
+      };
+    });
+    
+    return { lights };
   } catch (err) {
     console.error(err);
   }
