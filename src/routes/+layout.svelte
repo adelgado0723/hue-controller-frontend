@@ -40,7 +40,9 @@
 
 {#if isNavOpen}
 	<ul class="flex flex-col items-center justify-between min-h-[250px] text-success">
-		<li class="border-b border-gray-400 my-8 uppercase hover:transition-colors hover:text-secondary">
+		<li
+			class="border-b border-gray-400 my-8 uppercase hover:transition-colors hover:text-secondary"
+		>
 			<a on:click={() => (isNavOpen = !isNavOpen)} href="/about">About</a>
 		</li>
 		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
@@ -48,6 +50,9 @@
 		</li>
 		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
 			<a on:click={() => (isNavOpen = !isNavOpen)} href="/lights">Lights</a>
+		</li>
+		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
+			<a on:click={() => (isNavOpen = !isNavOpen)} href="/theme">Theme</a>
 		</li>
 	</ul>
 {/if}

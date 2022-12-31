@@ -1,0 +1,1105 @@
+{
+	"errors": [],
+	"data": [
+		{
+			"id": "3dcdcc5c-0d7f-4fb2-9fa8-277ee4ce6657",
+			"id_v1": "/lights/5",
+			"owner": {
+				"rid": "b6094c45-0fb7-4736-a2c6-4b3ae0534355",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Dining room",
+				"archetype": "sultan_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 55.12,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.1544,
+					"y": 0.0725
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 95.28
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.3414,
+							"y": 0.3868
+						}
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "ecec7366-d2f0-44db-8cb6-982faeb27b01",
+			"id_v1": "/lights/10",
+			"owner": {
+				"rid": "543922e0-f5e0-42ef-857b-bd6b33c12773",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Bathroom Hallway",
+				"archetype": "sultan_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 55.12,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.3786,
+					"y": 0.2083
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 100
+					}
+				},
+				"color": {
+					"mode": "color_temperature",
+					"color_temperature": {
+						"mirek": 156
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "6d9feb25-5330-4651-b648-5aa5f9b81352",
+			"id_v1": "/lights/9",
+			"owner": {
+				"rid": "968d154b-bb11-44f6-84db-1d6281200121",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "LITTLE Andy Desk 2",
+				"archetype": "sultan_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 55.12,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.2239,
+					"y": 0.0883
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 97.24
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.3348,
+							"y": 0.3611
+						}
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "174585ea-01d0-48d9-8881-3ff0010d0b4f",
+			"id_v1": "/lights/8",
+			"owner": {
+				"rid": "ea04eb24-e02c-4314-8393-47a774af1a55",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "TV Light",
+				"archetype": "sultan_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 55.12,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.6049,
+					"y": 0.3396
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 97.24
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.3309,
+							"y": 0.3809
+						}
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "1ff7f4e3-76a7-4f9b-92bb-d38f8de451e8",
+			"id_v1": "/lights/14",
+			"owner": {
+				"rid": "f461a095-79dd-499a-b0ed-0984d1e16a71",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Front door",
+				"archetype": "classic_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 40.16
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 555
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.1711,
+					"y": 0.6741
+				},
+				"gamut": {
+					"red": {
+						"x": 0.68,
+						"y": 0.31
+					},
+					"green": {
+						"x": 0.11,
+						"y": 0.82
+					},
+					"blue": {
+						"x": 0.13,
+						"y": 0.04
+					}
+				},
+				"gamut_type": "other"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"type": "light"
+		},
+		{
+			"id": "d1009978-8eb9-46af-893f-7bb60c9608f4",
+			"id_v1": "/lights/1",
+			"owner": {
+				"rid": "0037804f-6c63-4a6e-a7eb-7ff7f6ac94a4",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Kitchen 4",
+				"archetype": "classic_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 95.28,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.3351,
+					"y": 0.425
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 95.28
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.3351,
+							"y": 0.425
+						}
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "fd4b185a-8c09-464b-9aae-789a57924fa0",
+			"id_v1": "/lights/6",
+			"owner": {
+				"rid": "2d4c8c72-3232-4c48-808b-d09630531fd2",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Family Room Window",
+				"archetype": "sultan_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 55.12,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.1544,
+					"y": 0.0725
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 95.28
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.3351,
+							"y": 0.425
+						}
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "3aca4bec-c9dc-4c84-a0af-3adff8cde10b",
+			"id_v1": "/lights/2",
+			"owner": {
+				"rid": "c856c406-8b6d-44b5-95cc-107e61fe363c",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Kitchen 2",
+				"archetype": "classic_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 95.28,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.3352,
+					"y": 0.3612
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 95.28
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.3348,
+							"y": 0.3611
+						}
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "c0970d6a-0fd5-4dd5-9fec-1952c7b2ca2e",
+			"id_v1": "/lights/3",
+			"owner": {
+				"rid": "834c1eb3-e4ce-4d18-aea3-8495fabb5268",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Kitchen 1",
+				"archetype": "classic_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 95.28,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.3305,
+					"y": 0.3798
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 95.28
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.3308,
+							"y": 0.3798
+						}
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "e9a7baf3-9919-451d-a13d-3e6bc91c350e",
+			"id_v1": "/lights/12",
+			"owner": {
+				"rid": "4754b695-fa16-4441-877c-84abd5d2f7e9",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Office Door 1",
+				"archetype": "classic_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 40.16
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 555
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.5075,
+					"y": 0.44
+				},
+				"gamut": {
+					"red": {
+						"x": 0.68,
+						"y": 0.31
+					},
+					"green": {
+						"x": 0.11,
+						"y": 0.82
+					},
+					"blue": {
+						"x": 0.13,
+						"y": 0.04
+					}
+				},
+				"gamut_type": "other"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"type": "light"
+		},
+		{
+			"id": "6a2b995d-cae1-4b0b-91c2-1b71ded37a80",
+			"id_v1": "/lights/13",
+			"owner": {
+				"rid": "c60701e4-b410-44f0-8230-0abd2a0fc1e0",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Office Door 2",
+				"archetype": "classic_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 40.16
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 555
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.6777,
+					"y": 0.3085
+				},
+				"gamut": {
+					"red": {
+						"x": 0.68,
+						"y": 0.31
+					},
+					"green": {
+						"x": 0.11,
+						"y": 0.82
+					},
+					"blue": {
+						"x": 0.13,
+						"y": 0.04
+					}
+				},
+				"gamut_type": "other"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"type": "light"
+		},
+		{
+			"id": "fa960a3f-757e-4fed-9ec0-162355659c41",
+			"id_v1": "/lights/7",
+			"owner": {
+				"rid": "f99a4fb9-2262-4984-a7ad-3843677a626d",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Little Andy Desk Light",
+				"archetype": "sultan_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 55.12,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.6049,
+					"y": 0.3396
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 97.24
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.3348,
+							"y": 0.3611
+						}
+					}
+				}
+			},
+			"type": "light"
+		},
+		{
+			"id": "a782e7ee-14eb-465a-98b1-adb16f978718",
+			"id_v1": "/lights/4",
+			"owner": {
+				"rid": "38d1192f-3cb5-4609-a7b8-09464ce510aa",
+				"rtype": "device"
+			},
+			"metadata": {
+				"name": "Kitchen 3",
+				"archetype": "classic_bulb"
+			},
+			"on": {
+				"on": true
+			},
+			"dimming": {
+				"brightness": 95.28,
+				"min_dim_level": 0.20000000298023224
+			},
+			"dimming_delta": {},
+			"color_temperature": {
+				"mirek": null,
+				"mirek_valid": false,
+				"mirek_schema": {
+					"mirek_minimum": 153,
+					"mirek_maximum": 500
+				}
+			},
+			"color_temperature_delta": {},
+			"color": {
+				"xy": {
+					"x": 0.3389,
+					"y": 0.4043
+				},
+				"gamut": {
+					"red": {
+						"x": 0.6915,
+						"y": 0.3083
+					},
+					"green": {
+						"x": 0.17,
+						"y": 0.7
+					},
+					"blue": {
+						"x": 0.1532,
+						"y": 0.0475
+					}
+				},
+				"gamut_type": "C"
+			},
+			"dynamics": {
+				"status": "none",
+				"status_values": ["none", "dynamic_palette"],
+				"speed": 0,
+				"speed_valid": false
+			},
+			"alert": {
+				"action_values": ["breathe"]
+			},
+			"signaling": {},
+			"mode": "normal",
+			"effects": {
+				"status_values": ["no_effect", "candle", "fire"],
+				"status": "no_effect",
+				"effect_values": ["no_effect", "candle", "fire"]
+			},
+			"powerup": {
+				"preset": "custom",
+				"configured": true,
+				"on": {
+					"mode": "on",
+					"on": {
+						"on": true
+					}
+				},
+				"dimming": {
+					"mode": "dimming",
+					"dimming": {
+						"brightness": 95.28
+					}
+				},
+				"color": {
+					"mode": "color",
+					"color": {
+						"xy": {
+							"x": 0.339,
+							"y": 0.4042
+						}
+					}
+				}
+			},
+			"type": "light"
+		}
+	]
+}
