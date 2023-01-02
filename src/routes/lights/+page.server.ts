@@ -1,12 +1,6 @@
 import { BRIDGE_IP, BRIDGE_USERNAME } from '$env/static/private';
 import type { PageServerLoad } from './$types';
-import https from 'https';
 
-export interface light {
-  id: string;
-  name: string;
-  type: string;
-}
 export const load: PageServerLoad = (async ({ fetch }) => {
   try {
     console.log('executing api call...');
@@ -21,16 +15,22 @@ export const load: PageServerLoad = (async ({ fetch }) => {
     const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/light`, options);
 
     const data = await res.json();
-    console.log(data?.data);
 
     const lights = data?.data?.map((light: any) => {
       return {
-        id: light?.id,
+        id: light?.id.toString(),
         name: light?.metadata?.name,
-        type: light?.metadata?.archetype
+        type: light?.metadata?.archetype,
+        color: {
+          xy: {
+            x: light?.color?.xy?.x,
+            y: light?.color?.xy?.y
+          }
+        },
+        on: light?.on?.on
       };
     });
-    
+
     return { lights };
   } catch (err) {
     console.error(err);
