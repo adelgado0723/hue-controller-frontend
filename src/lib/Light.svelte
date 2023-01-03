@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { toggleLight } from './Light.server';
 	import type { iLight } from './Light';
 
 	export let light: iLight = {
@@ -8,6 +9,12 @@
 		color: { xy: { x: 0, y: 0 } },
 		on: false
 	};
+
+	let on = light.on;
+	async function handleToggleClick() {
+		on = !on;
+		await toggleLight(light.id, !on);
+	}
 	console.log(JSON.stringify(light, null, 2));
 </script>
 
@@ -27,7 +34,12 @@
 		<div class="pt-3  card-actions justify-center items-center w-full flex flex-col">
 			<div class="flex gap-2">
 				off
-				<input type="checkbox" class="toggle" bind:checked={light.on} />
+				<input
+					type="checkbox"
+					class="toggle"
+					checked={on}
+					on:click|preventDefault={handleToggleClick}
+				/>
 				on
 			</div>
 		</div>
