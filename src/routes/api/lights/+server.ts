@@ -1,22 +1,23 @@
+import { error, json } from '@sveltejs/kit';
 import { BRIDGE_IP, BRIDGE_USERNAME } from '$env/static/private';
-import type { PageServerLoad } from './$types';
+import type { RequestHandler } from './$types';
+import type { iLight } from '$lib/Light';
 
-export const load: PageServerLoad = (async ({ fetch }) => {
+export const GET = (async (): Promise<Response> => {
   try {
-    console.log('executing api call...');
     const headers = new Headers();
     headers.set('hue-application-key', BRIDGE_USERNAME);
 
     const options = {
       method: 'GET',
-      headers
+      headers,
     };
 
     const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/light`, options);
 
     const data = await res.json();
 
-    const lights = data?.data?.map((light: any) => {
+    const lights: iLight[] = data?.data?.map((light: any) => {
       return {
         id: light?.id.toString(),
         name: light?.metadata?.name,
@@ -24,15 +25,19 @@ export const load: PageServerLoad = (async ({ fetch }) => {
         color: {
           xy: {
             x: light?.color?.xy?.x,
-            y: light?.color?.xy?.y
-          }
+            y: light?.color?.xy?.y,
+          },
         },
-        on: light?.on?.on
+        on: light?.on?.on,
+        dimming: {
+          brightness: light?.dimming?.brightness,
+          minDimLevel: light?.dimming?.min_dim_level,
+        },
       };
     });
 
-    return { lights };
+    return json({ lights });
   } catch (err) {
-    console.error(err);
+    throw error(500, 'Error fetching lights');
   }
-}) satisfies PageServerLoad;
+}) satisfies RequestHandler;

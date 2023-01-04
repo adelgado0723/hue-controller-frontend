@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { iLight } from '$lib/Light';
-	import LightList from './LightList.svelte';
+	import LightList from '$lib/LightList.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData | { lights: iLight[] } = { lights: [] };

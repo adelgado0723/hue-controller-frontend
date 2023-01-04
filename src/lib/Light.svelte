@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { toggleLight } from './Light.server';
 	import type { iLight } from './Light';
 
 	export let light: iLight = {
@@ -7,16 +6,57 @@
 		id: '',
 		type: '',
 		color: { xy: { x: 0, y: 0 } },
-		on: false
+		on: false,
+		dimming: {
+			brightness: 95,
+			minDimLevel: 0.3
+		}
 	};
 
 	let on = light.on;
+	let brightness = light?.dimming?.brightness || 95;
+  let withinRepeatInterval = false;
+  const repeatIntervalMS = 150;
+
 	async function handleToggleClick() {
 		on = !on;
-		await toggleLight(light.id, !on);
+		const options = {
+			on
+		};
+		const response = await fetch('/api/light', {
+			method: 'PUT',
+			body: JSON.stringify({ id: light.id, options }),
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
+
+		console.log(await response.json());
 	}
-	console.log(JSON.stringify(light, null, 2));
+
+	async function handleBrightnessChange() {
+    if (withinRepeatInterval) return;
+    withinRepeatInterval = true;
+    await updateBrightness();
+    setTimeout(() => withinRepeatInterval = false, repeatIntervalMS);
+	}
+
+  async function updateBrightness() {
+		const options = {
+			brightness
+		};
+		const response = await fetch('/api/light', {
+			method: 'PUT',
+			body: JSON.stringify({ id: light.id, options }),
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
+		console.log(await response.json());
+  }
 </script>
+
+<h1>{withinRepeatInterval}</h1>
 
 <div class="card w-96 bg-neutral text-neutral-content">
 	<div class="card-body items-center text-center">
@@ -33,14 +73,28 @@
 		</ul>
 		<div class="pt-3  card-actions justify-center items-center w-full flex flex-col">
 			<div class="flex gap-2">
-				off
+				<span>power:</span>
 				<input
 					type="checkbox"
-					class="toggle"
+					class="toggle toggle-secondary"
 					checked={on}
-					on:click|preventDefault={handleToggleClick}
+					on:click={handleToggleClick}
 				/>
-				on
+			</div>
+		</div>
+		<div class="pt-3  card-actions justify-center items-center w-full flex flex-col">
+			<div class="flex gap-2">
+				<span>brightness:</span>
+				<input
+					type="range"
+					min={light?.dimming?.minDimLevel}
+					max="100"
+					on:input={handleBrightnessChange}
+					on:change={updateBrightness}
+					bind:value={brightness}
+					class="range range-xs {on ? 'range-warning' : 'disabled'}"
+          disabled={!on}
+				/>
 			</div>
 		</div>
 	</div>

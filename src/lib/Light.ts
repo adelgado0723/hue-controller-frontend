@@ -9,4 +9,8 @@ export interface iLight {
     };
   };
   on: boolean;
+  dimming: {
+    brightness: number;
+    minDimLevel: number;
+  }
 }
