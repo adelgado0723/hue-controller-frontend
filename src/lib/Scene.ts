@@ -1,4 +1,4 @@
-export interface Light {
+export interface Scene {
   id: string;
   name: string;
   type: string;
@@ -12,5 +12,5 @@ export interface Light {
   dimming: {
     brightness: number;
     minDimLevel: number;
-  }
+  };
 }

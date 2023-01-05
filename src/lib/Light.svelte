@@ -1,62 +1,59 @@
 <script lang="ts">
-	import type { iLight } from './Light';
+	import type { Light } from './Light';
 
-	export let light: iLight = {
-		name: '',
-		id: '',
-		type: '',
-		color: { xy: { x: 0, y: 0 } },
-		on: false,
-		dimming: {
-			brightness: 95,
-			minDimLevel: 0.3
-		}
+	export let light: Light = {
+	  name: '',
+	  id: '',
+	  type: '',
+	  color: { xy: { x: 0, y: 0 } },
+	  on: false,
+	  dimming: {
+	    brightness: 95,
+	    minDimLevel: 0.3,
+	  },
 	};
 
 	let on = light.on;
 	let brightness = light?.dimming?.brightness || 95;
-  let withinRepeatInterval = false;
-  const repeatIntervalMS = 150;
+	let withinRepeatInterval = false;
+	const repeatIntervalMS = 150;
 
 	async function handleToggleClick() {
-		on = !on;
-		const options = {
-			on
-		};
-		const response = await fetch('/api/light', {
-			method: 'PUT',
-			body: JSON.stringify({ id: light.id, options }),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
-
-		console.log(await response.json());
+	  on = !on;
+	  const options = {
+	    on,
+	  };
+	  await fetch('/api/light', {
+	    method: 'PUT',
+	    body: JSON.stringify({ id: light.id, options }),
+	    headers: {
+	      'content-type': 'application/json',
+	    },
+	  });
+	  // TODO: handle error
 	}
 
 	async function handleBrightnessChange() {
-    if (withinRepeatInterval) return;
-    withinRepeatInterval = true;
-    await updateBrightness();
-    setTimeout(() => withinRepeatInterval = false, repeatIntervalMS);
+	  if (withinRepeatInterval) return;
+	  withinRepeatInterval = true;
+	  await updateBrightness();
+	  setTimeout(() => (withinRepeatInterval = false), repeatIntervalMS);
 	}
 
-  async function updateBrightness() {
-		const options = {
-			brightness
-		};
-		const response = await fetch('/api/light', {
-			method: 'PUT',
-			body: JSON.stringify({ id: light.id, options }),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
-		console.log(await response.json());
-  }
+	async function updateBrightness() {
+	  const options = {
+	    brightness,
+	  };
+	  fetch('/api/light', {
+	    method: 'PUT',
+	    body: JSON.stringify({ id: light.id, options }),
+	    headers: {
+	      'content-type': 'application/json',
+	    },
+	  });
+	  // TODO: handle error
+	}
 </script>
-
-<h1>{withinRepeatInterval}</h1>
 
 <div class="card w-96 bg-neutral text-neutral-content">
 	<div class="card-body items-center text-center">
@@ -93,7 +90,7 @@
 					on:change={updateBrightness}
 					bind:value={brightness}
 					class="range range-xs {on ? 'range-warning' : 'disabled'}"
-          disabled={!on}
+					disabled={!on}
 				/>
 			</div>
 		</div>

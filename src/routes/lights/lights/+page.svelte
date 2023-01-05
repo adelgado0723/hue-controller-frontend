@@ -8,7 +8,7 @@
 	let lightData: Light[] = (data.lights as Light[])?.filter((light: Light) => !!light);
 
 	if (!lightData) {
-	  lightData = [];
+		lightData = [];
 	}
 </script>
 

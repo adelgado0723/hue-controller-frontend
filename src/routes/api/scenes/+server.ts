@@ -1,7 +1,7 @@
 import { error, json } from '@sveltejs/kit';
 import { BRIDGE_IP, BRIDGE_USERNAME } from '$env/static/private';
 import type { RequestHandler } from './$types';
-import type { Light } from '$lib/Light';
+import type { Scene } from '$lib/Scene';
 
 export const GET = (async (): Promise<Response> => {
   try {
@@ -13,13 +13,14 @@ export const GET = (async (): Promise<Response> => {
       headers,
     };
 
-    const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/light`, options);
+    const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/scene`, options);
 
     const data = await res.json();
+    console.log(JSON.stringify(data, null, 2));
 
-    const lights: Light[] = data?.data?.map((light: any) => {
+    const scenes: Scene[] = data?.data?.map((light: any) => {
       return {
-        id: light?.id.toString(),
+        id: light?.id?.toString(),
         name: light?.metadata?.name,
         type: light?.metadata?.archetype,
         color: {
@@ -36,7 +37,7 @@ export const GET = (async (): Promise<Response> => {
       };
     });
 
-    return json({ lights });
+    return json({ scenes });
   } catch (err) {
     throw error(500, 'Error fetching lights');
   }
