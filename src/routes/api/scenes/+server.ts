@@ -18,27 +18,31 @@ export const GET = (async (): Promise<Response> => {
     const data = await res.json();
     console.log(JSON.stringify(data, null, 2));
 
-    const scenes: Scene[] = data?.data?.map((light: any) => {
+    const scenes: Scene[] = data?.data?.map((scene: any) => {
       return {
-        id: light?.id?.toString(),
-        name: light?.metadata?.name,
-        type: light?.metadata?.archetype,
-        color: {
-          xy: {
-            x: light?.color?.xy?.x,
-            y: light?.color?.xy?.y,
-          },
+        id: scene?.id?.toString(),
+        name: scene?.metadata?.name,
+        actions: scene?.actions,
+        image: {
+          rid: scene?.metadata?.image?.rid,
+          rtype: scene?.metadata?.image?.rtype,
         },
-        on: light?.on?.on,
-        dimming: {
-          brightness: light?.dimming?.brightness,
-          minDimLevel: light?.dimming?.min_dim_level,
+        group: {
+          rid: scene?.group?.rid,
+          rtype: scene?.group?.rtype,
         },
+        pallet: {
+          color: scene?.pallet?.color,
+          dimming: scene?.pallet?.dimming,
+        },
+        speed: scene?.metadata?.speed,
+        autoDynamic: scene?.metadata?.auto_dynamic,
+        type: scene?.type,
       };
     });
 
     return json({ scenes });
   } catch (err) {
-    throw error(500, 'Error fetching lights');
+    throw error(500, 'Error fetching scenes');
   }
 }) satisfies RequestHandler;

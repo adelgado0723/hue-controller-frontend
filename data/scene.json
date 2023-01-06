@@ -1,0 +1,290 @@
+{
+  "id": "f48df4c9-ca67-4c82-acbc-0b0aa57e4b31",
+  "id_j1": "/scenes/J0dCQJsfenbRASZ",
+  "actions": [
+    {
+      "target": {
+        "rid": "d1009978-8eb9-46af-893f-7bb60c9608f4",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 68.11
+        },
+        "color": {
+          "xy": {
+            "x": 0.4258,
+            "y": 0.4104
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "3aca4bec-c9dc-4c84-a0af-3adff8cde10b",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 68.11
+        },
+        "color": {
+          "xy": {
+            "x": 0.3754,
+            "y": 0.3602
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "c0970d6a-0fd5-4dd5-9fec-1952c7b2ca2e",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 68.11
+        },
+        "color": {
+          "xy": {
+            "x": 0.3659,
+            "y": 0.4529
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "a782e7ee-14eb-465a-98b1-adb16f978718",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 68.11
+        },
+        "color": {
+          "xy": {
+            "x": 0.4313,
+            "y": 0.4348
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "3dcdcc5c-0d7f-4fb2-9fa8-277ee4ce6657",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 68.11
+        },
+        "color": {
+          "xy": {
+            "x": 0.403,
+            "y": 0.382
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "fd4b185a-8c09-464b-9aae-789a57924fa0",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 68.11
+        },
+        "color": {
+          "xy": {
+            "x": 0.4258,
+            "y": 0.4104
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "fa960a3f-757e-4fed-9ec0-162355659c41",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 74.41
+        },
+        "color": {
+          "xy": {
+            "x": 0.3754,
+            "y": 0.3602
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "174585ea-01d0-48d9-8881-3ff0010d0b4f",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 74.41
+        },
+        "color": {
+          "xy": {
+            "x": 0.403,
+            "y": 0.382
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "6d9feb25-5330-4651-b648-5aa5f9b81352",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 74.41
+        },
+        "color": {
+          "xy": {
+            "x": 0.3754,
+            "y": 0.3602
+          }
+        }
+      }
+    },
+    {
+      "target": {
+        "rid": "ecec7366-d2f0-44db-8cb6-982faeb27b01",
+        "rtype": "light"
+      },
+      "action": {
+        "on": {
+          "on": true
+        },
+        "dimming": {
+          "brightness": 74.41
+        },
+        "color": {
+          "xy": {
+            "x": 0.3754,
+            "y": 0.3602
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "name": "Sunday morning",
+    "image": {
+      "rid": "3bc285d2-cb38-4d51-98dc-8da84a82f034",
+      "rtype": "public_image"
+    }
+  },
+  "group": {
+    "rid": "a23e5de2-d749-4478-879e-2bf100a520a4",
+    "rtype": "zone"
+  },
+  "palette": {
+    "color": [
+      {
+        "color": {
+          "xy": {
+            "x": 0.3754,
+            "y": 0.3602
+          }
+        },
+        "dimming": {
+          "brightness": 68.11
+        }
+      },
+      {
+        "color": {
+          "xy": {
+            "x": 0.403,
+            "y": 0.382
+          }
+        },
+        "dimming": {
+          "brightness": 68.11
+        }
+      },
+      {
+        "color": {
+          "xy": {
+            "x": 0.4258,
+            "y": 0.4104
+          }
+        },
+        "dimming": {
+          "brightness": 68.11
+        }
+      },
+      {
+        "color": {
+          "xy": {
+            "x": 0.4324,
+            "y": 0.4345
+          }
+        },
+        "dimming": {
+          "brightness": 100
+        }
+      },
+      {
+        "color": {
+          "xy": {
+            "x": 0.3659,
+            "y": 0.4529
+          }
+        },
+        "dimming": {
+          "brightness": 68.11
+        }
+      }
+    ],
+    "dimming": [],
+    "color_temperature": [
+      {
+        "color_temperature": {
+          "mirek": 303
+        },
+        "dimming": {
+          "brightness": 68.11
+        }
+      }
+    ]
+  },
+  "speed": 0.626984126984127,
+  "auto_dynamic": false,
+  "type": "scene"
+}

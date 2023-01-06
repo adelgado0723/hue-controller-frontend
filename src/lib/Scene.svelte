@@ -5,6 +5,7 @@
 	  name: '',
 	  id: '',
 	  type: '',
+
 	  color: { xy: { x: 0, y: 0 } },
 	  on: false,
 	  dimming: {
@@ -34,26 +35,18 @@
 <div class="card w-96 bg-neutral text-neutral-content">
 	<div class="card-body items-center text-center">
 		<h2 class="card-title">{scene.name}</h2>
+		<code>{JSON.stringify(scene, null, 2)}</code>
 		<p>name: {scene.name}</p>
 		<p>id: {scene.id}</p>
 		<p>type: {scene.type}</p>
-		<p>color:</p>
-		<ul>
-			<li>
-				<p>x: {scene.color?.xy?.x}</p>
-				<p>y: {scene.color?.xy?.y}</p>
-			</li>
-		</ul>
-		<div class="pt-3  card-actions justify-center items-center w-full flex flex-col">
-			<div class="flex gap-2">
-				<span>power:</span>
-				<input
-					type="checkbox"
-					class="toggle toggle-secondary"
-					checked={on}
-					on:click={handleToggleClick}
-				/>
-			</div>
-		</div>
+    <!-- <p>image: {JSON.stringify(scene.image)}</p> // fetch the image -->
+		<!-- <p>color:</p> -->
+		<!-- <ul> -->
+		<!-- 	<li> -->
+		<!-- 		<p>x: {scene.color?.xy?.x}</p> -->
+		<!-- 		<p>y: {scene.color?.xy?.y}</p> -->
+		<!-- 	</li> -->
+		<!-- </ul> -->
+		<!-- <p>on: {scene.on}</p> -->
 	</div>
 </div>
