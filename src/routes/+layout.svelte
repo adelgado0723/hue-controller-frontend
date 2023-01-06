@@ -55,6 +55,9 @@
 			<a on:click={() => (isNavOpen = !isNavOpen)} href="/scenes">Scenes</a>
 		</li>
 		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
+			<a on:click={() => (isNavOpen = !isNavOpen)} href="/signup">Sign Up</a>
+		</li>
+		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
 			<a on:click={() => (isNavOpen = !isNavOpen)} href="/theme">Theme</a>
 		</li>
 	</ul>
