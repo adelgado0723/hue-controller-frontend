@@ -11,8 +11,8 @@ let contacts = [
     id: 'de393e6a-1c08-4e6e-9aad-0994fcf0d981',
     name: 'Saul Goodman',
     email: 'saul@example.com',
-    company: 'Saul Goodman & Associates',
-    job: 'Attorney',
+    password: 'supersecret',
+    passwordConfirm: 'supersecret',
   },
 ];
 
@@ -30,8 +30,6 @@ export const actions = {
     const email = formData.get('email');
     const password = formData.get('password');
     const passwordConfirm = formData.get('passwordConfirm');
-    const company = formData.get('company');
-    const job = formData.get('job');
 
     // TODO: add validation
     if (!!name && name?.length < 2) {
@@ -40,8 +38,33 @@ export const actions = {
         message: 'Name must be at least 2 characters long',
         name,
         email,
-        company,
-        job,
+      });
+    }
+
+    if (!email) {
+      return fail(400, {
+        error: true,
+        message: 'Email is required',
+        name,
+        email,
+      });
+    }
+
+    if (!password) {
+      return fail(400, {
+        error: true,
+        message: 'Password is required',
+        name,
+        email,
+      });
+    }
+
+    if (!passwordConfirm) {
+      return fail(400, {
+        error: true,
+        message: 'Password confirmation is required',
+        name,
+        email,
       });
     }
 
@@ -50,8 +73,6 @@ export const actions = {
       id,
       name,
       email,
-      company,
-      job,
       password,
       passwordConfirm,
     };

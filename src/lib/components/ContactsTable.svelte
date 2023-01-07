@@ -14,7 +14,7 @@
 					</label>
 				</th>
 				<th>Name</th>
-				<th>Job</th>
+				<th>Password</th>
 				<th>Email</th>
 				<th />
 			</tr>
@@ -40,9 +40,9 @@
 						</div>
 					</td>
 					<td>
-						{contact.company}
+						{contact.passwordConfirm}
 						<br />
-						<span class="badge badge-ghost badge-sm">{contact.job}</span>
+						<span class="badge badge-ghost badge-sm">{contact.password}</span>
 					</td>
 					<td>{contact.email}</td>
 					<th>
@@ -59,7 +59,7 @@
 			<tr>
 				<th />
 				<th>Name</th>
-				<th>Job</th>
+				<th>Password</th>
 				<th>Email</th>
 				<th />
 			</tr>
