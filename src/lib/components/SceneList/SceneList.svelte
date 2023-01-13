@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Scene from '$lib/Scene.svelte';
-	import type { Scene as IScene } from './Scene';
+	import Scene from '$lib/components/Scene/Scene.svelte';
+	import type { Scene as IScene } from '$lib/components/Scene/Scene';
 
 	export let sceneData: IScene[] = [];
 </script>

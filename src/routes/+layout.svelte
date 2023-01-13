@@ -5,7 +5,7 @@
 
 <nav class="navbar bg-primary">
 	<div class="flex-1">
-		<a class="btn btn-ghost normal-case text-xl" href="/">Hue Controller</a>
+		<a class="btn btn-ghost normal-case text-xl" href="/">Hue Hub</a>
 	</div>
 	{#if !isNavOpen}
 		<div class="navbar-end">

@@ -1,4 +1,4 @@
-import type { XYColor } from '$lib/Light';
+import type { XYColor } from '$lib/components/Light/Light';
 
 export enum SceneEffect {
   sparkle = 'sparkle',

@@ -33,7 +33,7 @@ module.exports = {
         functions: 'always-multiline'
       }
     ],
-    'object-curly-spacing': ['error', 'always'],
+    'object-curly-spacing': ['never', 'always'],
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/indent': ['error', 2],

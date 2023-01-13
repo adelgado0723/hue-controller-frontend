@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Scene } from './Scene';
+	import type { Scene } from '$lib/components/Scene/Scene';
 
 	export let scene: Scene = {
 	  name: '',

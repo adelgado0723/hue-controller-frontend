@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import type { Scene } from '$lib/Scene';
-	import SceneList from '$lib/SceneList.svelte';
+	import type { Scene } from '$lib/Scene/Scene';
+	import SceneList from '$lib/components/SceneList/SceneList.svelte';
 
 	export let data: PageData | { scenes: Scene[] } = { scenes: [] };
 

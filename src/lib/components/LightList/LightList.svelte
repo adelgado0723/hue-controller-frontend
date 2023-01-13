@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Light from '$lib/Light.svelte';
-	import type { Light as ILight } from './Light';
+	import Light from '$lib/components/Light/Light.svelte';
+	import type { Light as ILight } from '$lib/components/Light/Light';
 
 	export let lightData: ILight[] = [];
 </script>
