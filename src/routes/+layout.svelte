@@ -1,66 +1,56 @@
-<script>
+<script lang="ts">
+	import type { PageData } from './$types';
 	import '../app.postcss';
-	let isNavOpen = false;
+	export let data: PageData;
 </script>
 
-<nav class="navbar bg-primary">
-	<div class="flex-1">
-		<a class="btn btn-ghost normal-case text-xl" href="/">Hue Hub</a>
-	</div>
-	{#if !isNavOpen}
-		<div class="navbar-end">
-			<button on:click={() => (isNavOpen = !isNavOpen)} class="btn btn-square btn-ghost">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					class="inline-block w-5 h-5 stroke-current"
-					><path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-					/></svg
+<div class="min-h-full">
+	<nav class="navbar bg-base-100 border-b">
+		<div class="flex-1">
+			<a class="btn btn-ghost normal-case text-xl" href="/">Hue Hub</a>
+		</div>
+
+		{#if !data.user}
+			<div class="dropdown dropdown-end">
+				<a href="/login" class="btn btn-primary">Login</a>
+				<a href="/signup" class="btn btn-secondary">Register</a>
+			</div>
+		{:else}
+			<div class="dropdown dropdown-end mr-4">
+				<a href="/scenes/new" class="btn btn-primary">Add Scene</a>
+			</div>
+			<div class="dropdown dropdown-end">
+				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<!-- for safari -->
+				<label tabindex="0" class="btn btn-ghost btn-circle avatar">
+					<div class="w-10 rounded-full">
+						<img src="https://placeimg.com/80/80/people" alt="User avatar" />
+					</div>
+				</label>
+				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+				<ul
+					tabindex="0"
+					class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 				>
-			</button>
+					<li>
+						<a href="/scenes" class="justify-between">My Scenes</a>
+					</li>
+					<li>
+						<a href="/settings">Settings</a>
+					</li>
+					<li>
+						<form action="/logout" method="POST">
+							<button type="submit" class="w-full text-start">Logout</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+		{/if}
+	</nav>
+	<div class="py-10">
+		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+			<slot />
 		</div>
-	{/if}
-
-	{#if isNavOpen}
-		<div class="navbar-end">
-			<button on:click={() => (isNavOpen = !isNavOpen)} class="btn btn-square btn-ghost">
-				<svg class="h-8 w-8 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-					<line x1="18" y1="6" x2="6" y2="18" />
-					<line x1="6" y1="6" x2="18" y2="18" />
-				</svg>
-			</button>
-		</div>
-	{/if}
-</nav>
-
-{#if isNavOpen}
-	<ul class="flex flex-col items-center justify-between min-h-[250px] text-success">
-		<li
-			class="border-b border-gray-400 my-8 uppercase hover:transition-colors hover:text-secondary"
-		>
-			<a on:click={() => (isNavOpen = !isNavOpen)} href="/about">About</a>
-		</li>
-		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
-			<a on:click={() => (isNavOpen = !isNavOpen)} href="/settings">Settings</a>
-		</li>
-		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
-			<a on:click={() => (isNavOpen = !isNavOpen)} href="/lights">Lights</a>
-		</li>
-		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
-			<a on:click={() => (isNavOpen = !isNavOpen)} href="/scenes">Scenes</a>
-		</li>
-		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
-			<a on:click={() => (isNavOpen = !isNavOpen)} href="/signup">Sign Up</a>
-		</li>
-		<li class="border-b border-gray-400 my-8 uppercase hover:text-secondary">
-			<a on:click={() => (isNavOpen = !isNavOpen)} href="/theme">Theme</a>
-		</li>
-	</ul>
-{/if}
-
-<slot />
+	</div>
+</div>

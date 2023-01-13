@@ -1,7 +1,7 @@
 import { error, json } from '@sveltejs/kit';
 import { BRIDGE_IP, BRIDGE_USERNAME } from '$env/static/private';
 import type { RequestHandler } from './$types';
-import type { Light } from '$lib/Light';
+import type { Light } from '$lib/components/Light/Light';
 
 export const GET = (async (): Promise<Response> => {
   try {
@@ -10,7 +10,7 @@ export const GET = (async (): Promise<Response> => {
 
     const options = {
       method: 'GET',
-      headers,
+      headers
     };
 
     const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/light`, options);
@@ -25,14 +25,14 @@ export const GET = (async (): Promise<Response> => {
         color: {
           xy: {
             x: light?.color?.xy?.x,
-            y: light?.color?.xy?.y,
-          },
+            y: light?.color?.xy?.y
+          }
         },
         on: light?.on?.on,
         dimming: {
           brightness: light?.dimming?.brightness,
-          minDimLevel: light?.dimming?.min_dim_level,
-        },
+          minDimLevel: light?.dimming?.min_dim_level
+        }
       };
     });
 

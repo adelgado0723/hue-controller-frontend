@@ -1,4 +1,6 @@
-import { fail, invalid } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
+import type { Actions } from './$types';
+
 export interface SignupForm {
   name: string;
   email: string;
@@ -12,17 +14,17 @@ let contacts = [
     name: 'Saul Goodman',
     email: 'saul@example.com',
     password: 'supersecret',
-    passwordConfirm: 'supersecret',
-  },
+    passwordConfirm: 'supersecret'
+  }
 ];
 
 export const load = () => {
   return {
-    contacts,
+    contacts
   };
 };
 
-export const actions = {
+export const actions: Actions = {
   create: async ({ request }) => {
     const formData = await request.formData();
 
@@ -37,7 +39,7 @@ export const actions = {
         error: true,
         message: 'Name must be at least 2 characters long',
         name,
-        email,
+        email
       });
     }
 
@@ -46,7 +48,7 @@ export const actions = {
         error: true,
         message: 'Email is required',
         name,
-        email,
+        email
       });
     }
 
@@ -55,7 +57,7 @@ export const actions = {
         error: true,
         message: 'Password is required',
         name,
-        email,
+        email
       });
     }
 
@@ -64,25 +66,25 @@ export const actions = {
         error: true,
         message: 'Password confirmation is required',
         name,
-        email,
+        email
       });
     }
 
     const id = crypto.randomUUID();
     const contact = {
-      id,
-      name,
-      email,
-      password,
-      passwordConfirm,
+      id: id,
+      name: name?.toString() || '',
+      email: email?.toString() || '',
+      password: password?.toString() || '',
+      passwordConfirm: passwordConfirm?.toString() || ''
     };
 
     contacts.push(contact);
 
+    // we could alternatively redirect instead of returning success
     /* throw redirect(303, '/signup'); */
-
     return {
-      success: true,
+      success: true
     };
   },
   delete: async ({ request }) => {
@@ -92,7 +94,7 @@ export const actions = {
     contacts = contacts.filter((contact) => contact.id !== id);
 
     return {
-      success: true,
+      success: true
     };
-  },
+  }
 };

@@ -1,6 +1,12 @@
-<script>
+<script lang="ts">
 	import { enhance } from '$app/forms';
-	export let contacts = [];
+	export let contacts: {
+		id: string;
+		name: string;
+		email: string;
+		password: string;
+		passwordConfirm: string;
+	}[] = [];
 </script>
 
 <div class="overflow-x-auto w-full mt-6">

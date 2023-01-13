@@ -1,5 +1,5 @@
-<script>
-	export let message;
+<script lang="ts">
+	export let message: string;
 </script>
 
 <div class="alert alert-error shadow-lg max-w-xs mt-4">

@@ -1,22 +1,12 @@
-<script>
-	import { enhance, applyAction } from '$app/forms';
+<script lang="ts">
 	import ContactsTable from '$lib/components/ContactsTable.svelte';
-	import Alert from '$lib/components/Alert.svelte';
 	import Signup from '$lib/components/signup/Signup.svelte';
-	export let data;
-	export let form;
-	console.log(form);
+	import type { PageData, ActionData } from './$types';
+	export let data: PageData;
+	export let form: ActionData;
 </script>
 
-<Signup data={data} form={form} />
-<ContactsTable contacts={data?.contacts} />
-
-<!-- <style> -->
-<!-- 	@tailwind base; -->
-<!--   @tailwind components; -->
-<!--   @tailwind utilities; -->
-<!---->
-<!-- 	label { -->
-<!-- 		color : ; -->
-<!-- 	} -->
-<!-- </style> -->
+<div class="flex flex-col items-center h-full w-full">
+	<Signup {form} />
+	<ContactsTable contacts={data?.contacts} />
+</div>
