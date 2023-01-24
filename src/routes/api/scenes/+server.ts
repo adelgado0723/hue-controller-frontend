@@ -1,4 +1,5 @@
 import { error, json } from '@sveltejs/kit';
+// @ts-ignore -- svekt kit has trouble with this
 import { BRIDGE_IP, BRIDGE_USERNAME } from '$env/static/private';
 import type { RequestHandler } from './$types';
 import type { Scene } from '$lib/components/Scene/Scene';

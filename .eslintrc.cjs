@@ -33,14 +33,14 @@ module.exports = {
         functions: 'always-multiline'
       }
     ],
-    'object-curly-spacing': ['never', 'always'],
+    'object-curly-spacing': ['error', 'always'],
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/indent': ['error', 2],
     'jsx-quotes': ['error', 'prefer-single'],
     'lines-between-class-members': ['off', 'always'],
     'no-await-in-loop': ['off', 'always'],
-    'no-console': 'error',
+    'no-console': 'warn',
     'no-extra-boolean-cast': 'off',
     'no-restricted-syntax': [
       'error',

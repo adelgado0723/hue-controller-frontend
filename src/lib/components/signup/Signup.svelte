@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance, applyAction } from '$app/forms';
+  /* @ts-ignore */
 	import type { ActionData } from './$types';
 	import Alert from '$lib/components/Alert.svelte';
 	export let form: ActionData;
@@ -10,7 +11,7 @@
 		Register for an account
 	</h2>
 	<p class="text-center mt-1">
-		Or <a href="/signup" class="text-primary font-medium hover:cursor-pointer hover:underline"
+		Or <a href="/login" class="text-primary font-medium hover:cursor-pointer hover:underline"
 			>sign in</a
 		> if you already have an account.
 	</p>
@@ -28,7 +29,6 @@
 				if (result.type === 'failure') {
 					await applyAction(result);
 				}
-
 				update();
 			};
 		}}

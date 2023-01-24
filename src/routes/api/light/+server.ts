@@ -1,10 +1,11 @@
 import { error, json } from '@sveltejs/kit';
+// @ts-ignore -- svekt kit has trouble with this
 import { BRIDGE_IP, BRIDGE_USERNAME } from '$env/static/private';
 import type { RequestHandler } from './$types';
 
 export const PUT = (async ({ request }) => {
   const { id, options } = await request.json();
-
+  
   try {
     const headers = new Headers();
     headers.set('hue-application-key', BRIDGE_USERNAME);
