@@ -11,7 +11,7 @@ export const GET = (async (): Promise<Response> => {
 
     const options = {
       method: 'GET',
-      headers
+      headers,
     };
 
     const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/scene`, options);
@@ -26,19 +26,19 @@ export const GET = (async (): Promise<Response> => {
         actions: scene?.actions,
         image: {
           rid: scene?.metadata?.image?.rid,
-          rtype: scene?.metadata?.image?.rtype
+          rtype: scene?.metadata?.image?.rtype,
         },
         group: {
           rid: scene?.group?.rid,
-          rtype: scene?.group?.rtype
+          rtype: scene?.group?.rtype,
         },
         pallet: {
           color: scene?.pallet?.color,
-          dimming: scene?.pallet?.dimming
+          dimming: scene?.pallet?.dimming,
         },
         speed: scene?.metadata?.speed,
         autoDynamic: scene?.metadata?.auto_dynamic,
-        type: scene?.type
+        type: scene?.type,
       };
     });
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance, applyAction } from '$app/forms';
-  /* @ts-ignore */
+	/* @ts-ignore */
 	import type { ActionData } from './$types';
 	import Alert from '$lib/components/Alert.svelte';
 	export let form: ActionData;
@@ -8,16 +8,16 @@
 
 <div class="flex flex-col items-center h-full w-full">
 	<h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-base-content">
-		Register for an account
+		Sign in to your account
 	</h2>
 	<p class="text-center mt-1">
-		Or <a href="/login" class="text-primary font-medium hover:cursor-pointer hover:underline"
-			>sign in</a
-		> if you already have an account.
+		<a href="/signup" class="text-primary font-medium hover:cursor-pointer hover:underline"
+			>Sign up</a
+		> if you don't already have an account.
 	</p>
 	<form
 		method="POST"
-		action="?/signup"
+		action="?/login"
 		class="flex flex-col items-center space-y-2 w-full pt-4"
 		use:enhance={({ form }) => {
 			// Before form submission to server
@@ -33,18 +33,6 @@
 			};
 		}}
 	>
-		<div class="form-control w-full max-w-md">
-			<label for="name" class="label font-medium pb-1">
-				<span class="label-text">Name</span>
-			</label>
-
-			<input
-				type="text"
-				name="name"
-				value={form?.name ?? ''}
-				class="input input-bordered w-full max-w-md"
-			/>
-		</div>
 		<div class="form-control w-full max-w-md">
 			<label for="email" class="label font-medium pb-1">
 				<span class="label-text">Email</span>
@@ -63,17 +51,13 @@
 			<input type="password" name="password" class="input input-bordered w-full max-w-md" />
 		</div>
 		<div class="form-control w-full max-w-md">
-			<label for="passwordConfirm" class="label font-medium pb-1">
-				<span class="label-text">Confirm Password</span>
-			</label>
+			<button type="submit" class="btn btn-primary w-full">Login</button>
+		</div>
 
-			<input type="password" name="passwordConfirm" class="input input-bordered w-full max-w-md" />
-		</div>
-		<div class="form-control w-full max-w-md">
-			<button type="submit" class="btn btn-primary w-full">Register</button>
-		</div>
-		{#if form?.message}
-			<Alert message={form?.message} />
+		{#if !!form?.message}
+			<div class="w-full max-w-md">
+				<Alert message={form.message} />
+			</div>
 		{/if}
 	</form>
 </div>

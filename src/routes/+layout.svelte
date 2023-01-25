@@ -37,6 +37,9 @@
 						<a href="/scenes" class="justify-between">My Scenes</a>
 					</li>
 					<li>
+						<a href="/lights" class="justify-between">My Lights</a>
+					</li>
+					<li>
 						<a href="/settings">Settings</a>
 					</li>
 					<li>

@@ -2,7 +2,7 @@
 	export let message: string;
 </script>
 
-<div class="alert alert-error shadow-lg max-w-xs mt-4">
+<div class="alert alert-error shadow-lg  mt-4">
 	<div>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

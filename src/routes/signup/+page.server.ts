@@ -10,22 +10,6 @@ export interface SignupForm {
   passwordConfirm: string;
 }
 
-let contacts = [
-  {
-    id: 'de393e6a-1c08-4e6e-9aad-0994fcf0d981',
-    name: 'Saul Goodman',
-    email: 'saul@example.com',
-    password: 'supersecret',
-    passwordConfirm: 'supersecret',
-  },
-];
-
-export const load = () => {
-  return {
-    contacts,
-  };
-};
-
 export const actions: Actions = {
   signup: async ({ locals, request }) => {
     /* another way to get form data */
