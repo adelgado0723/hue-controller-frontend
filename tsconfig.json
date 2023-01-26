@@ -2,11 +2,12 @@
   "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
+    "module": "es2020",
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "strictNullChecks": true, /* Enable strict null checks. */
+    "strictNullChecks": true /* Enable strict null checks. */,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
@@ -14,7 +15,7 @@
     "typeRoots": [
       "./src/types",
       "./node_modules/@types"
-    ], /* List of folders to include type definitions from. */
+    ] /* List of folders to include type definitions from. */,
     "plugins": [
       {
         "name": "typescript-svelte-plugin"
@@ -29,7 +30,7 @@
     "node_modules",
     "typings",
     "types"
-  ],
+  ]
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   //
   // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
