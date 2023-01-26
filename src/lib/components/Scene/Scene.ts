@@ -67,7 +67,7 @@ export interface Scene {
         brightness: number;
       };
     }[];
-  }[];
+  }[] | null;
   speed: number;
   auto_dynamic: boolean
   

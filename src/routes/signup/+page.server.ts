@@ -1,6 +1,5 @@
-import { error, redirect } from '@sveltejs/kit';
 import { generateUsername } from '$lib/utils';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export interface SignupForm {
@@ -17,13 +16,12 @@ export const actions: Actions = {
     /* let name = formData.get('name'); */
     const body = Object.fromEntries(await request.formData());
     const username = generateUsername(body.name.toString().split(' ').join('').toLowerCase());
+    const name = body.name.toString();
+    const email = body.email.toString();
+    const password = body.password.toString();
+    const passwordConfirm = body.passwordConfirm.toString();
 
     try {
-      const name = body.name.toString();
-      const email = body.email.toString();
-      const password = body.password.toString();
-      const passwordConfirm = body.passwordConfirm.toString();
-
       // TODO: add validation
       if (!!name && name?.length < 2) {
         return fail(400, {
@@ -61,23 +59,17 @@ export const actions: Actions = {
         });
       }
 
-      const id = crypto.randomUUID();
-      const contact = {
-        id: id,
-        name: name?.toString() || '',
-        email: email?.toString() || '',
-        password: password?.toString() || '',
-        passwordConfirm: passwordConfirm?.toString() || '',
-      };
-
-      contacts.push(contact);
       await locals.pb.collection('users').create({ username, ...body });
-      console.log(body.email.toString());
       await locals.pb.collection('users').requestVerification(body.email.toString());
 
-
-    } catch (err) {
-      throw error(500, 'error registering user');
+    } catch (err: any | { data: { message: string } }) {
+      // using fail function here instead of throwing an error to stay on the same page
+      return fail(500, {
+        error: true,
+        message: err?.data?.message || 'error registering useer',
+        name,
+        email,
+      });
     }
     // we could alternatively redirect instead of returning success
     throw redirect(303, '/');
@@ -85,15 +77,5 @@ export const actions: Actions = {
     /* return { */
     /*   success: true */
     /* }; */
-  },
-  delete: async ({ request }) => {
-    const formData = await request.formData();
-    const id = formData.get('id');
-
-    contacts = contacts.filter((contact) => contact.id !== id);
-
-    return {
-      success: true,
-    };
   },
 };

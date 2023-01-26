@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { enhance, applyAction } from '$app/forms';
-	/* @ts-ignore */
-	import type { ActionData } from './$types';
+	import { AlertType } from '$lib/types';
 	import Alert from '$lib/components/Alert.svelte';
-	export let form: ActionData;
+	import type { SignupFormResponse } from './Signup';
+	export let form: SignupFormResponse;
 </script>
 
 <div class="flex flex-col items-center h-full w-full">
@@ -74,7 +74,7 @@
 		</div>
 		{#if form?.message}
 			<div class="w-full max-w-md">
-				<Alert message={form?.message} />
+				<Alert type={AlertType.Error} message={form?.message} />
 			</div>
 		{/if}
 	</form>

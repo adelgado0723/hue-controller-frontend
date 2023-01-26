@@ -8,3 +8,9 @@ export type User = {
   deletedAt: string;
 };
 
+export const enum AlertType {
+  Success = 'success',
+  Error = 'error',
+  Info = 'info',
+  Warning = 'warning',
+}

@@ -5,7 +5,18 @@
 	  name: '',
 	  id: '',
 	  type: '',
-
+	  image: {
+	    rid: '',
+	    rtype: '',
+	  },
+	  group: {
+	    rid: '',
+	    rtype: '',
+	  },
+	  pallet: null,
+	  speed: 0,
+	  auto_dynamic: false,
+	  actions: [],
 	  color: { xy: { x: 0, y: 0 } },
 	  on: false,
 	  dimming: {
@@ -13,23 +24,6 @@
 	    minDimLevel: 0.3,
 	  },
 	};
-
-	let on = scene.on;
-
-	async function handleToggleClick() {
-	  on = !on;
-	  const options = {
-	    on,
-	  };
-	  await fetch('/api/scene', {
-	    method: 'PUT',
-	    body: JSON.stringify({ id: scene.id, options }),
-	    headers: {
-	      'content-type': 'application/json',
-	    },
-	  });
-	  // TODO: handle error
-	}
 </script>
 
 <div class="card w-96 bg-neutral text-neutral-content">
@@ -39,7 +33,7 @@
 		<p>name: {scene.name}</p>
 		<p>id: {scene.id}</p>
 		<p>type: {scene.type}</p>
-    <!-- <p>image: {JSON.stringify(scene.image)}</p> // fetch the image -->
+		<!-- <p>image: {JSON.stringify(scene.image)}</p> // fetch the image -->
 		<!-- <p>color:</p> -->
 		<!-- <ul> -->
 		<!-- 	<li> -->

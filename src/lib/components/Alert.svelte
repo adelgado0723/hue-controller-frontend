@@ -1,8 +1,33 @@
 <script lang="ts">
+	import { AlertType } from '$lib/types';
 	export let message: string;
+	export let type: string;
+	if (!type) {
+	  type = 'error';
+	}
+
+	let alertType = '';
+	switch (type) {
+	  case AlertType.Error:
+	    alertType = 'alert-error';
+	    break;
+	  case AlertType.Success:
+	    alertType = 'alert-success';
+	    break;
+	  case AlertType.Warning:
+	    alertType = 'alert-warning';
+	    break;
+	  case AlertType.Info:
+	    alertType = 'alert-info';
+	    break;
+	  default:
+	    alertType = 'alert-error';
+	}
+
+	const classes = 'alert shadow-lg  mt-4 ' + alertType;
 </script>
 
-<div class="alert alert-error shadow-lg  mt-4">
+<div class={classes}>
 	<div>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

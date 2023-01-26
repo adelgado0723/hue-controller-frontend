@@ -1,23 +1,19 @@
 <script lang="ts">
 	import { enhance, applyAction } from '$app/forms';
-	import type { LoginFormResponse } from './Login';
-	import { AlertType } from '$lib/types';
+	import type { ResetPasswordFormResponse } from './ResetPassword';
+
 	import Alert from '$lib/components/Alert.svelte';
-	export let form: LoginFormResponse;
+	export let form: ResetPasswordFormResponse;
 </script>
 
 <div class="flex flex-col items-center h-full w-full">
 	<h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-base-content">
-		Sign in to your account
+		Reset Your Password
 	</h2>
-	<p class="text-center mt-1">
-		<a href="/signup" class="text-primary font-medium hover:cursor-pointer hover:underline"
-			>Sign up</a
-		> if you don't already have an account.
-	</p>
+	<p class="text-center mt-1">We'll send you a link to reset your password.</p>
 	<form
 		method="POST"
-		action="?/login"
+		action="?/resetPassword"
 		class="flex flex-col items-center space-y-2 w-full pt-4"
 		use:enhance={({ form }) => {
 			// Before form submission to server
@@ -45,24 +41,12 @@
 			/>
 		</div>
 		<div class="form-control w-full max-w-md">
-			<label for="password" class="label font-medium pb-1">
-				<span class="label-text">Password</span>
-			</label>
-			<input type="password" name="password" class="input input-bordered w-full max-w-md" />
-		</div>
-		<div class="w-full max-w-md">
-			<a
-				href="/reset-password"
-				class="font-medium text-primary hover:cursor-pointer hover:underline">Forgot password?</a
-			>
-		</div>
-		<div class="form-control w-full max-w-md">
-			<button type="submit" class="btn btn-primary w-full">Login</button>
+			<button type="submit" class="btn btn-primary w-full">Reset Password</button>
 		</div>
 
-		{#if !!form?.message}
+		{#if form?.success}
 			<div class="w-full max-w-md">
-				<Alert type={AlertType.Error} message={form.message} />
+				<Alert type="success" message={'An email has been sent to reset your password.'} />
 			</div>
 		{/if}
 	</form>

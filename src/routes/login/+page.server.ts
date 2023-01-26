@@ -1,5 +1,5 @@
 import { appendToErrorMessage } from '$lib/utils';
-import { error, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
@@ -14,10 +14,10 @@ export const actions: Actions = {
     /* const formData = await request.formData(); */
     /* let name = formData.get('name'); */
     const body = Object.fromEntries(await request.formData());
+    const email = body.email.toString();
+    const password = body.password.toString();
 
     try {
-      const email = body.email.toString();
-      const password = body.password.toString();
       let errMessage = '';
 
       if (!email) {
@@ -42,9 +42,13 @@ export const actions: Actions = {
           email,
         });
       }
-    } catch (err) {
+    } catch (err: any | { data: { message: string } }) {
       console.log('error logging in', err);
-      throw error(500, 'error logging in');
+      return fail(500, {
+        error: true,
+        message: err?.data?.message || 'Error logging in',
+        email,
+      });
     }
     throw redirect(303, '/');
   },

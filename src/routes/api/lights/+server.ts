@@ -1,8 +1,8 @@
 import { error, json } from '@sveltejs/kit';
-/* @ts-ignore -- svekt kit has trouble with this */
-import { BRIDGE_IP, BRIDGE_USERNAME } from '$env/static/private';
 import type { RequestHandler } from './$types';
 import type { Light } from '$lib/components/Light/Light';
+import { variables } from '$lib/variables';
+const { BRIDGE_IP, BRIDGE_USERNAME } = variables;
 
 export const GET = (async (): Promise<Response> => {
   try {

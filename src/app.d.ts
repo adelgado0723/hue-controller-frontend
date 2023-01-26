@@ -5,13 +5,13 @@ import PocketBase from 'pocketbase';
 import User from '$lib/types';
 
 declare global {
-	namespace App {
-		// interface Error {}
-		interface Locals {
-			pb: PocketBase;
+  namespace App {
+    // interface Error {}
+    interface Locals {
+      pb: PocketBase;
       user: User | undefined;
-		}
-		// interface PageData {}
-		// interface Platform {}
-	}
+    }
+    // interface PageData {}
+    // interface Platform {}
+  }
 }
