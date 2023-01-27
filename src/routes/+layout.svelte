@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import '../app.postcss';
+	import { getImageURL } from '$lib/utils';
 	export let data: PageData;
 </script>
 
@@ -25,7 +26,12 @@
 				<!-- for safari -->
 				<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 					<div class="w-10 rounded-full">
-						<img src="https://placeimg.com/80/80/people" alt="User avatar" />
+						<img
+							src={data.user?.avatar
+								? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar)
+								: `https://ui-avatars.com/api/name=${data.user?.name}`}
+							alt="User avatar"
+						/>
 					</div>
 				</label>
 				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -40,7 +46,7 @@
 						<a href="/lights" class="justify-between">My Lights</a>
 					</li>
 					<li>
-						<a href="/settings">Settings</a>
+						<a href="/my/settings/profile">Settings</a>
 					</li>
 					<li>
 						<form action="/logout" method="POST">
@@ -51,5 +57,5 @@
 			</div>
 		{/if}
 	</nav>
-  <slot />
+	<slot />
 </div>

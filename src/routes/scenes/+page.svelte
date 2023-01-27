@@ -8,7 +8,7 @@
 	let sceneData: Scene[] = (data.scenes as Scene[])?.filter((scene: Scene) => !!scene);
 
 	if (!sceneData) {
-		sceneData = [];
+	  sceneData = [];
 	}
 </script>
 
