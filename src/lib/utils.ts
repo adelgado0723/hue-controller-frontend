@@ -1,4 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
+import { variables } from '$lib/variables';
+const { BE_URL } = variables;
 
 export function serializeNonPOJOs(obj: unknown) {
   return structuredClone(obj);
@@ -22,5 +24,5 @@ export const getImageURL = (
   fileName: string,
   size = '0x0',
 ) => {
-  return `http://localhost:8090/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
+  return `${BE_URL}/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
 };

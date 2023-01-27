@@ -3,10 +3,14 @@
 	import Input from '$lib/components/Input/Input.svelte';
 	import type { PageData } from './$types';
 	import { getImageURL } from '$lib/utils';
+	import { enhance, applyAction, type SubmitFunction } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 
 	let icon: IconSource = Pencil;
 
 	export let data: PageData;
+	let loading: boolean;
+	$: loading = false;
 
 	const showPreview = (event: Event) => {
 	  const target = event.target as HTMLInputElement;
@@ -17,6 +21,24 @@
 	    preview.src = src;
 	  }
 	};
+
+	const submitUpdateProfile = (() => {
+	  loading = true;
+	  return async ({ result }) => {
+	    switch (result.type) {
+	      case 'success':
+	        await invalidateAll();
+	        break;
+	      case 'error':
+	        break;
+	      default:
+	        applyAction(result);
+	        break;
+	    }
+	    loading = false;
+	  };
+	}) satisfies SubmitFunction;
+
 </script>
 
 <div class="flex flex-col w-full h-full">
@@ -25,6 +47,7 @@
 		method="POST"
 		enctype="multipart/form-data"
 		class="flex flex-col space-y-2 w-full"
+		use:enhance={submitUpdateProfile}
 	>
 		<h3 class="text-2xl font-medium">Update Profile</h3>
 		<div class="form-control w-full max-w-lg">
@@ -55,9 +78,10 @@
 				accept="image/*"
 				hidden
 				on:change={showPreview}
+				disabled={loading}
 			/>
 		</div>
-		<Input id="name" label="Name" value={data?.user?.name} />
+		<Input id="name" label="Name" value={data?.user?.name} disabled={loading} />
 		<div class="w-full max-w-lg pt-3">
 			<button class="btn btn-primary w-full max-w-lg" type="submit"> Update Profile </button>
 		</div>
