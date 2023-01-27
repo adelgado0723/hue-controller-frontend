@@ -1,0 +1,12 @@
+# Things that need to be done
+
+- [ ] Change out input fields for custom input component in:
+
+  - [ ] Signup Component
+  - [ ] Login Component
+  - [ ] Reset Password Component
+
+- [ ] Add loading states to:
+  - [ ] Signup Component
+  - [ ] Login Component
+  - [ ] Reset Password Component
