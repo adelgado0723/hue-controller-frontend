@@ -32,7 +32,7 @@
 	      case 'error':
 	        break;
 	      default:
-	        applyAction(result);
+	        await applyAction(result);
 	        break;
 	    }
 	    loading = false;
