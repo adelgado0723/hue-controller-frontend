@@ -69,7 +69,7 @@
 					label="Enter your new email address"
 					type="email"
 					required={true}
-					value={form?.email}
+					value={form?.data?.email}
 					disabled={loading}
 				/>
 				<button type="submit" class="btn btn-primary w-full">Change my email</button>
@@ -101,7 +101,7 @@
 					label="Enter your new username"
 					type="text"
 					required={true}
-					value={form?.username}
+					value={form?.data?.username}
 					disabled={loading}
 				/>
 				<button class="btn btn-primary w-full" disabled={loading}> Change my username </button>

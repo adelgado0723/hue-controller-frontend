@@ -7,6 +7,11 @@
   - [ ] Reset Password Component
 
 - [ ] Add loading states to:
+
   - [ ] Signup Component
   - [ ] Login Component
   - [ ] Reset Password Component
+
+- [ ] Add error handling to settings section
+  - [ ] Change Email
+  - [ ] Change Username
