@@ -66,7 +66,7 @@ export const actions: Actions = {
       // using fail function here instead of throwing an error to stay on the same page
       return fail(500, {
         error: true,
-        message: err?.data?.message || 'error registering useer',
+        message: err?.data?.message || 'error registering user',
         name,
         email,
       });
