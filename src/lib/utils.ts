@@ -7,7 +7,7 @@ export function serializeNonPOJOs(obj: unknown) {
 }
 
 export function generateUsername(name: string) {
-  const id = uuidv4().toString();
+  const id = uuidv4().toString().split('-').join('');
   return `${name.slice(0, 5)}${id}`;
 }
 
