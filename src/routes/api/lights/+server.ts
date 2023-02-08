@@ -79,6 +79,7 @@ export const GET = (async (): Promise<Response> => {
 
     return json({ lights });
   } catch (err) {
+    console.error(err);
     throw error(500, 'Error fetching lights');
   }
 }) satisfies RequestHandler;

@@ -1,19 +1,34 @@
+import https from 'https';
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { variables } from '$lib/variables';
-const { BRIDGE_IP, BRIDGE_USERNAME } = variables;
+const { BRIDGE_IP, BRIDGE_USERNAME, BRIDGE_SERVER_NAME, BRIDGE_SSL_CERT } = variables;
+import fetch from 'node-fetch';
+import type { PeerCertificate } from 'tls';
+import type { RequestInit } from 'node-fetch';
 
 export const PUT = (async ({ request }) => {
   const { id, options } = await request.json();
-  
+
   try {
     const headers = new Headers();
     headers.set('hue-application-key', BRIDGE_USERNAME);
 
-    const req = {
+    const opts: Partial<RequestInit> = {
+      headers: headers,
       method: 'PUT',
-      headers,
-      body: '',
+      agent: new https.Agent({
+        checkServerIdentity: (hostname: string, cert: PeerCertificate) => {
+          // Make sure the peer certificate's common name is equal to
+          // the Hue bridgeId that this request is for.
+          if (cert.subject.CN === BRIDGE_SERVER_NAME) {
+            return undefined;
+          } else {
+            return new Error('Server identity check failed. CN does not match bridgeId.');
+          }
+        },
+        ca: BRIDGE_SSL_CERT,
+      }),
     };
 
     const body: Partial<{ on: { on: boolean }; dimming: { brightness: number } }> = {};
@@ -24,12 +39,16 @@ export const PUT = (async ({ request }) => {
       body.dimming = { brightness: options.brightness };
     }
 
-    req.body = JSON.stringify(body);
-    const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/light/${id}`, req);
+    opts.body = JSON.stringify(body);
+    const res = await fetch(`https://${BRIDGE_IP}/clip/v2/resource/light/${id}`, opts);
 
     const data = await res.json();
+    if (!data) {
+      throw error(500, 'No data returned from bridge');
+    }
     return json(data);
   } catch (err) {
+    console.error(err);
     throw error(500, 'Error updating light');
   }
 }) satisfies RequestHandler;
