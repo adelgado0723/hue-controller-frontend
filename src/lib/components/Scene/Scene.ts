@@ -59,8 +59,8 @@ export interface Scene {
     dimming: {
       brightness: number;
     }[];
-    color_temperature: {
-      color_temperature: {
+    colorTemperature: {
+      colorTemperature: {
         mirek: number;
       };
       dimming: {
@@ -69,7 +69,7 @@ export interface Scene {
     }[];
   }[] | null;
   speed: number;
-  auto_dynamic: boolean
+  autoDynamic: boolean
   
   type: string;
   actions: SceneAction[];
