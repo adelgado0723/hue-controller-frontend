@@ -6,6 +6,6 @@
 	const resetPasswordForm = form as ResetPasswordFormResponse;
 </script>
 
-<div class="flex flex-col items-center h-full w-full">
+<div class="flex h-full w-full flex-col items-center">
 	<ResetPassword form={resetPasswordForm} />
 </div>

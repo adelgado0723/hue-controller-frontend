@@ -1,4 +1,5 @@
 import { generateUsername } from '$lib/utils';
+import { appendToErrorMessage } from '$lib/utils';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
@@ -23,37 +24,27 @@ export const actions: Actions = {
 
     try {
       // TODO: add validation
+      let errMessage = '';
       if (!!name && name?.length < 2) {
-        return fail(400, {
-          error: true,
-          message: 'Name must be at least 2 characters long',
-          name,
-          email,
-        });
+        errMessage = appendToErrorMessage(errMessage, 'Name is required');
       }
 
       if (!email) {
-        return fail(400, {
-          error: true,
-          message: 'Email is required',
-          name,
-          email,
-        });
+        errMessage = appendToErrorMessage(errMessage, 'Email is required');
       }
 
       if (!password) {
-        return fail(400, {
-          error: true,
-          message: 'Password is required',
-          name,
-          email,
-        });
+        errMessage = appendToErrorMessage(errMessage, 'Password is required');
       }
 
       if (!passwordConfirm) {
+        errMessage = appendToErrorMessage(errMessage, 'Password confirmation is required');
+      }
+
+      if (!!errMessage) {
         return fail(400, {
           error: true,
-          message: 'Password confirmation is required',
+          message: errMessage,
           name,
           email,
         });
@@ -61,9 +52,9 @@ export const actions: Actions = {
 
       await locals.pb.collection('users').create({ username, ...body });
       await locals.pb.collection('users').requestVerification(body.email.toString());
-
     } catch (err: any | { data: { message: string } }) {
       // using fail function here instead of throwing an error to stay on the same page
+      console.error('error registering user', err);
       return fail(500, {
         error: true,
         message: err?.data?.message || 'error registering user',

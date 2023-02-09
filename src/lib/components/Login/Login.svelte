@@ -4,21 +4,22 @@
 	import { AlertType } from '$lib/types';
 	import Alert from '$lib/components/Alert.svelte';
 	export let form: LoginFormResponse;
+	let errorMessage: string;
 </script>
 
-<div class="flex flex-col items-center h-full w-full">
+<div class="flex h-full w-full flex-col items-center">
 	<h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-base-content">
 		Sign in to your account
 	</h2>
-	<p class="text-center mt-1">
-		<a href="/signup" class="text-primary font-medium hover:cursor-pointer hover:underline"
+	<p class="mt-1 text-center">
+		<a href="/signup" class="font-medium text-primary hover:cursor-pointer hover:underline"
 			>Sign up</a
 		> if you don't already have an account.
 	</p>
 	<form
 		method="POST"
 		action="?/login"
-		class="flex flex-col items-center space-y-2 w-full pt-4"
+		class="flex w-full flex-col items-center space-y-2 pt-4"
 		use:enhance={({ form }) => {
 			// Before form submission to server
 			return async ({ result, update }) => {
@@ -27,6 +28,8 @@
 					form.reset();
 				}
 				if (result.type === 'failure') {
+					console.log('from login component: ' + JSON.stringify(result, null, 2));
+					errorMessage = result.data?.message;
 					await applyAction(result);
 				}
 				update();
@@ -34,21 +37,21 @@
 		}}
 	>
 		<div class="form-control w-full max-w-md">
-			<label for="email" class="label font-medium pb-1">
+			<label for="email" class="label pb-1 font-medium">
 				<span class="label-text">Email</span>
 			</label>
 			<input
 				type="email"
 				name="email"
 				value={form?.email ?? ''}
-				class="input input-bordered w-full max-w-md"
+				class="input-bordered input w-full max-w-md"
 			/>
 		</div>
 		<div class="form-control w-full max-w-md">
-			<label for="password" class="label font-medium pb-1">
+			<label for="password" class="label pb-1 font-medium">
 				<span class="label-text">Password</span>
 			</label>
-			<input type="password" name="password" class="input input-bordered w-full max-w-md" />
+			<input type="password" name="password" class="input-bordered input w-full max-w-md" />
 		</div>
 		<div class="w-full max-w-md">
 			<a
@@ -57,12 +60,12 @@
 			>
 		</div>
 		<div class="form-control w-full max-w-md">
-			<button type="submit" class="btn btn-primary w-full">Login</button>
+			<button type="submit" class="btn-primary btn w-full">Login</button>
 		</div>
 
-		{#if !!form?.message}
+		{#if !!errorMessage}
 			<div class="w-full max-w-md">
-				<Alert type={AlertType.Error} message={form.message} />
+				<Alert type={AlertType.Error} message={errorMessage} />
 			</div>
 		{/if}
 	</form>
