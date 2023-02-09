@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Light } from './Light';
+	import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte';
 
 	export let light: Light = {
 	  name: '',
@@ -94,5 +95,6 @@
 				/>
 			</div>
 		</div>
+		<LightModal {light}/>
 	</div>
 </div>
