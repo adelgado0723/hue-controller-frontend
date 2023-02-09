@@ -26,6 +26,7 @@ export const actions: Actions = {
       if (!password) {
         errMessage = appendToErrorMessage(errMessage, 'Password is required');
       }
+
       if (!!errMessage)
         return fail(400, {
           error: true,
@@ -43,7 +44,7 @@ export const actions: Actions = {
         });
       }
     } catch (err: any | { data: { message: string } }) {
-      console.log('error logging in', err);
+      console.error('error logging in', err);
       return fail(500, {
         error: true,
         message: err?.data?.message || 'Error logging in',

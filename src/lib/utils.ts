@@ -13,7 +13,7 @@ export function generateUsername(name: string) {
 
 export function appendToErrorMessage(errorMessage: string, message: string) {
   if (errorMessage) {
-    return errorMessage + '\n' + message;
+    return errorMessage + '; ' + message;
   }
   return message;
 }
