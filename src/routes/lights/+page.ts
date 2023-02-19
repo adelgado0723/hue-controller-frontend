@@ -1,86 +1,46 @@
 import type { Light } from '$lib/components/Light/Light';
+import type { HueLight, HueLights } from '$lib/types';
 import { variables } from '$lib/variables';
-/* import type { Handle } from '@sveltejs/kit'; */
 import { error, json } from '@sveltejs/kit';
-import axios, { AxiosHeaders } from 'axios';
-import https from 'https';
-import type { PeerCertificate } from 'tls';
 import type { PageLoad } from './$types';
-const { BRIDGE_IP, BRIDGE_USERNAME, BRIDGE_SERVER_NAME, BRIDGE_SSL_CERT } = variables;
+const { BRIDGE_IP, BRIDGE_USERNAME } = variables;
 
-/* export const handle = async (({ event, resolve }) => { */
-/*   return resolve(event, { ssr: false }); */
-/* }) satisfies Handle; */
 export const ssr = false;
-
-interface HueLight {
-  id: string;
-  metadata: {
-    name: string;
-    archetype: string;
-  };
-  color: {
-    xy: {
-      x: number;
-      y: number;
-    };
-  };
-  on: {
-    on: boolean;
-  };
-  dimming: {
-    brightness: number;
-    minDimLevel: number;
-  };
-}
 
 export const load: PageLoad = (async () => {
   try {
-    const headers = new AxiosHeaders();
-    headers.set('hue-application-key', BRIDGE_USERNAME);
-
-    const res = await axios.request({
-      url: `https://${BRIDGE_IP}/clip/v2/resource/light`,
-      headers: headers,
+    const opts = {
+      /* headers: headers, */
       method: 'GET',
-      httpsAgent: new https.Agent({
-        checkServerIdentity: (hostname: string, cert: PeerCertificate) => {
-          // Make sure the peer certificate's common name is equal to
-          // the Hue bridgeId that this request is for.
-          if (cert.subject.CN === BRIDGE_SERVER_NAME) {
-            return undefined;
-          } else {
-            return new Error('Server identity check failed. CN does not match bridgeId.');
-          }
-        },
-        ca: BRIDGE_SSL_CERT,
-      }),
-    });
+    };
 
-    if (!res.data) {
+    const res = await fetch(`http://${BRIDGE_IP}/api/${BRIDGE_USERNAME}/lights`, opts);
+
+    const data: HueLights = await res.json();
+    if (!data) {
       throw error(500, 'No data returned from bridge');
     }
-    console.log(res.data);
+    console.log(data);
     console.log('Fetch from front end worked!');
-    const lights: Light[] = res.data.map((light: HueLight) => {
+    const lights = Object.keys(data).map((key): Light => {
+      const light: HueLight = data[key];
       return {
-        id: light?.id.toString(),
-        name: light?.metadata?.name,
-        type: light?.metadata?.archetype,
+        id: key,
+        name: light?.name,
+        type: light?.config?.archetype,
         color: {
           xy: {
-            x: light?.color?.xy?.x,
-            y: light?.color?.xy?.y,
+            x: light?.state?.xy[0],
+            y: light?.state?.xy[1],
           },
         },
-        on: light?.on?.on,
+        on: light?.state?.on,
         dimming: {
-          brightness: light?.dimming?.brightness,
-          minDimLevel: light?.dimming?.minDimLevel,
+          brightness: light?.state?.bri,
+          mindimlevel: light?.capabilities?.control?.mindimlevel,
         },
       };
     });
-
     return json({ lights });
   } catch (err) {
     console.error(err);

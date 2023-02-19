@@ -1,6 +1,10 @@
 <script lang="ts">
 	import type { Light } from './Light';
+	import type RequestInit from 'http';
 	import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte';
+	import { VITE_BRIDGE_USERNAME, VITE_BRIDGE_IP } from '$env/static/private';
+	import type { UpdateLightRequest } from '$lib/types';
+	import { error } from '@sveltejs/kit';
 
 	export let light: Light = {
 	  name: '',
@@ -21,17 +25,30 @@
 
 	async function handleToggleClick() {
 	  on = !on;
-	  const options = {
+	  const req: Partial<UpdateLightRequest> = {
 	    on,
 	  };
-	  await fetch('/api/light', {
-	    method: 'PUT',
-	    body: JSON.stringify({ id: light.id, options }),
-	    headers: {
-	      'content-type': 'application/json',
-	    },
-	  });
-	  // TODO: handle error
+
+	  try {
+	    const opts: RequestInit = {
+	      method: 'PUT',
+	    };
+
+	    opts.body = JSON.stringify(req);
+	    const res = await fetch(
+	      `http://${VITE_BRIDGE_IP}/api/${VITE_BRIDGE_USERNAME}/${light.id}/state`,
+	      opts,
+	    );
+
+	    const data = await res.json();
+	    if (!data) {
+	      throw error(500, 'No data returned from bridge');
+	    }
+	    return data;
+	  } catch (err) {
+	    console.error(err);
+	    throw error(500, 'Error updating light');
+	  }
 	}
 
 	async function handleBrightnessChange() {
@@ -42,17 +59,30 @@
 	}
 
 	async function updateBrightness() {
-	  const options = {
-	    brightness,
+	  const req: Partial<UpdateLightRequest> = {
+	    bri: brightness,
 	  };
-	  fetch('/api/light', {
-	    method: 'PUT',
-	    body: JSON.stringify({ id: light.id, options }),
-	    headers: {
-	      'content-type': 'application/json',
-	    },
-	  });
-	  // TODO: handle error
+
+	  try {
+	    const opts: RequestInit = {
+	      method: 'PUT',
+	    };
+
+	    opts.body = JSON.stringify(req);
+	    const res = await fetch(
+	      `http://${VITE_BRIDGE_IP}/api/${VITE_BRIDGE_USERNAME}/${light.id}/state`,
+	      opts,
+	    );
+
+	    const data = await res.json();
+	    if (!data) {
+	      throw error(500, 'No data returned from bridge');
+	    }
+	    return data;
+	  } catch (err) {
+	    console.error(err);
+	    throw error(500, 'Error updating light');
+	  }
 	}
 </script>
 
@@ -69,18 +99,18 @@
 				<p>y: {light.color?.xy?.y}</p>
 			</li>
 		</ul>
-		<div class="pt-3  card-actions justify-center items-center w-full flex flex-col">
+		<div class="card-actions  flex w-full flex-col items-center justify-center pt-3">
 			<div class="flex gap-2">
 				<span>power:</span>
 				<input
 					type="checkbox"
-					class="toggle toggle-secondary"
+					class="toggle-secondary toggle"
 					checked={on}
 					on:click={handleToggleClick}
 				/>
 			</div>
 		</div>
-		<div class="pt-3  card-actions justify-center items-center w-full flex flex-col">
+		<div class="card-actions  flex w-full flex-col items-center justify-center pt-3">
 			<div class="flex gap-2">
 				<span>brightness:</span>
 				<input
@@ -95,6 +125,6 @@
 				/>
 			</div>
 		</div>
-		<LightModal {light}/>
+		<LightModal {light} />
 	</div>
 </div>
