@@ -1,9 +1,8 @@
 import type { Light } from '$lib/components/Light/Light';
 import type { HueLight, HueLights } from '$lib/types';
-import { variables } from '$lib/variables';
 import { error, json } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-const { BRIDGE_IP, BRIDGE_USERNAME } = variables;
+import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
 
 export const ssr = false;
 
@@ -14,7 +13,7 @@ export const load: PageLoad = (async () => {
       method: 'GET',
     };
 
-    const res = await fetch(`http://${BRIDGE_IP}/api/${BRIDGE_USERNAME}/lights`, opts);
+    const res = await fetch(`http://${PUBLIC_BRIDGE_IP}/api/${PUBLIC_BRIDGE_USERNAME}/lights`, opts);
 
     const data: HueLights = await res.json();
     if (!data) {
@@ -26,6 +25,7 @@ export const load: PageLoad = (async () => {
       const light: HueLight = data[key];
       return {
         id: key,
+        uniqueId: light?.uniqueid,
         name: light?.name,
         type: light?.config?.archetype,
         color: {
@@ -37,13 +37,12 @@ export const load: PageLoad = (async () => {
         on: light?.state?.on,
         dimming: {
           brightness: light?.state?.bri,
-          mindimlevel: light?.capabilities?.control?.mindimlevel,
+          minDimLevel: light?.capabilities?.control?.mindimlevel,
         },
       };
     });
-    return json({ lights });
+    return { lights };
   } catch (err) {
-    console.error(err);
     return { error: 'Failed to load lights' };
   }
 }) satisfies PageLoad;

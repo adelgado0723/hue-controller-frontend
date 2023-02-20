@@ -1,8 +1,7 @@
 import type { PageLoad } from './$types';
-import { variables } from '$lib/variables';
-const { BRIDGE_IP, BRIDGE_USERNAME } = variables;
 import type { HueScene } from '$lib/types';
 import { error } from '@sveltejs/kit';
+import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
 
 export const ssr = false;
 
@@ -13,7 +12,10 @@ export const load: PageLoad = (async ({ fetch }) => {
       method: 'GET',
     };
 
-    const res = await fetch(`http://${BRIDGE_IP}/api/${BRIDGE_USERNAME}/lights`, opts);
+    const res = await fetch(
+      `http://${PUBLIC_BRIDGE_IP}/api/${PUBLIC_BRIDGE_USERNAME}/lights`,
+      opts,
+    );
 
     const data: any = await res.json();
     /* const data: HueScene[] = await res.json(); */
@@ -44,7 +46,6 @@ export const load: PageLoad = (async ({ fetch }) => {
     /* return { scenes }; */
     return { data };
   } catch (err) {
-    console.error(err);
     return { error: 'Failed to load scenes' };
   }
 }) satisfies PageLoad;

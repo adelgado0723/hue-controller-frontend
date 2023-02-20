@@ -2,15 +2,16 @@
 	import type { Light } from '$lib/components/Light/Light';
 
 	export let light: Light = {
-		name: '',
-		id: '',
-		type: '',
-		color: { xy: { x: 0, y: 0 } },
-		on: false,
-		dimming: {
-			brightness: 95,
-			minDimLevel: 0.3,
-		},
+	  name: '',
+	  id: '',
+	  uniqueId: '',
+	  type: '',
+	  color: { xy: { x: 0, y: 0 } },
+	  on: false,
+	  dimming: {
+	    brightness: 95,
+	    minDimLevel: 0.3,
+	  },
 	};
 
 	let on = light.on;
@@ -19,39 +20,39 @@
 	const repeatIntervalMS = 150;
 
 	async function handleToggleClick() {
-		on = !on;
-		const options = {
-			on,
-		};
-		await fetch('/api/light', {
-			method: 'PUT',
-			body: JSON.stringify({ id: light.id, options }),
-			headers: {
-				'content-type': 'application/json',
-			},
-		});
-		// TODO: handle error
+	  on = !on;
+	  const options = {
+	    on,
+	  };
+	  await fetch('/api/light', {
+	    method: 'PUT',
+	    body: JSON.stringify({ id: light.id, options }),
+	    headers: {
+	      'content-type': 'application/json',
+	    },
+	  });
+	  // TODO: handle error
 	}
 
 	async function handleBrightnessChange() {
-		if (withinRepeatInterval) return;
-		withinRepeatInterval = true;
-		await updateBrightness();
-		setTimeout(() => (withinRepeatInterval = false), repeatIntervalMS);
+	  if (withinRepeatInterval) return;
+	  withinRepeatInterval = true;
+	  await updateBrightness();
+	  setTimeout(() => (withinRepeatInterval = false), repeatIntervalMS);
 	}
 
 	async function updateBrightness() {
-		const options = {
-			brightness,
-		};
-		fetch('/api/light', {
-			method: 'PUT',
-			body: JSON.stringify({ id: light.id, options }),
-			headers: {
-				'content-type': 'application/json',
-			},
-		});
-		// TODO: handle error
+	  const options = {
+	    brightness,
+	  };
+	  fetch('/api/light', {
+	    method: 'PUT',
+	    body: JSON.stringify({ id: light.id, options }),
+	    headers: {
+	      'content-type': 'application/json',
+	    },
+	  });
+	  // TODO: handle error
 	}
 </script>
 

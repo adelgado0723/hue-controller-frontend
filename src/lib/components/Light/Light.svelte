@@ -2,13 +2,14 @@
 	import type { Light } from './Light';
 	import type RequestInit from 'http';
 	import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte';
-	import { VITE_BRIDGE_USERNAME, VITE_BRIDGE_IP } from '$env/static/private';
+	import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
 	import type { UpdateLightRequest } from '$lib/types';
 	import { error } from '@sveltejs/kit';
 
 	export let light: Light = {
 	  name: '',
 	  id: '',
+	  uniqueId: '',
 	  type: '',
 	  color: { xy: { x: 0, y: 0 } },
 	  on: false,
@@ -19,7 +20,7 @@
 	};
 
 	let on = light.on;
-	let brightness = light?.dimming?.brightness || 95;
+	let brightness = light?.dimming?.brightness;
 	let withinRepeatInterval = false;
 	const repeatIntervalMS = 150;
 
@@ -36,7 +37,7 @@
 
 	    opts.body = JSON.stringify(req);
 	    const res = await fetch(
-	      `http://${VITE_BRIDGE_IP}/api/${VITE_BRIDGE_USERNAME}/${light.id}/state`,
+	      `http://${PUBLIC_BRIDGE_IP}/api/${PUBLIC_BRIDGE_USERNAME}/lights/${light.id}/state`,
 	      opts,
 	    );
 
@@ -46,7 +47,6 @@
 	    }
 	    return data;
 	  } catch (err) {
-	    console.error(err);
 	    throw error(500, 'Error updating light');
 	  }
 	}
@@ -70,7 +70,7 @@
 
 	    opts.body = JSON.stringify(req);
 	    const res = await fetch(
-	      `http://${VITE_BRIDGE_IP}/api/${VITE_BRIDGE_USERNAME}/${light.id}/state`,
+	      `http://${PUBLIC_BRIDGE_IP}/api/${PUBLIC_BRIDGE_USERNAME}/lights/${light.id}/state`,
 	      opts,
 	    );
 
@@ -80,7 +80,6 @@
 	    }
 	    return data;
 	  } catch (err) {
-	    console.error(err);
 	    throw error(500, 'Error updating light');
 	  }
 	}
@@ -115,8 +114,8 @@
 				<span>brightness:</span>
 				<input
 					type="range"
-					min={light?.dimming?.minDimLevel}
-					max="100"
+          min="1"
+					max="254"
 					on:input={handleBrightnessChange}
 					on:change={updateBrightness}
 					bind:value={brightness}

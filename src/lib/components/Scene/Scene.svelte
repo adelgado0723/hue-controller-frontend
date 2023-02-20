@@ -15,7 +15,7 @@
 	  },
 	  pallet: null,
 	  speed: 0,
-	  auto_dynamic: false,
+	  autoDynamic: false,
 	  actions: [],
 	  color: { xy: { x: 0, y: 0 } },
 	  on: false,
