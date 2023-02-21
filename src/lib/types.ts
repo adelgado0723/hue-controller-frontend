@@ -35,21 +35,26 @@ export type UpdateLightRequest = {
 
 export type HueScene = {
   name: string;
-  lights?: string[];
+  image: string;
+  group: string;
+  owner?: string;
+  locked?: boolean;
   recycle?: boolean;
+  lastupdated?: Date;
+  version?: number;
+  lights?: string[];
   appdata?: {
     version?: number;
     data?: string;
   };
   lightstates?: {
-    [lightId: string]: {
-      on: boolean;
-      bri: number;
-      xy: [number, number];
-      effect?: string;
-    };
+    [lightId: string]: Partial<HueLightState>;
   };
   type: string;
+};
+
+export type HueScenes = {
+  [id: string]: HueScene;
 };
 
 export type HueLightState = {

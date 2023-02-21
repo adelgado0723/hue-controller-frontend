@@ -1,15 +1,15 @@
-import type { Light } from '$lib/components/Light/Light';
-import type { HueLight, HueLights } from '$lib/types';
-import { error, json } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
 import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
+import type { Light } from '$lib/components/Light/Light';
+import { convertHueLightToLight } from '$lib/hue';
+import type { HueLight, HueLights } from '$lib/types';
+import { error } from '@sveltejs/kit';
+import type { PageLoad } from './$types';
 
 export const ssr = false;
 
 export const load: PageLoad = (async () => {
   try {
     const opts = {
-      /* headers: headers, */
       method: 'GET',
     };
 
@@ -19,27 +19,9 @@ export const load: PageLoad = (async () => {
     if (!data) {
       throw error(500, 'No data returned from bridge');
     }
-    console.log(data);
-    console.log('Fetch from front end worked!');
     const lights = Object.keys(data).map((key): Light => {
       const light: HueLight = data[key];
-      return {
-        id: key,
-        uniqueId: light?.uniqueid,
-        name: light?.name,
-        type: light?.config?.archetype,
-        color: {
-          xy: {
-            x: light?.state?.xy[0],
-            y: light?.state?.xy[1],
-          },
-        },
-        on: light?.state?.on,
-        dimming: {
-          brightness: light?.state?.bri,
-          minDimLevel: light?.capabilities?.control?.mindimlevel,
-        },
-      };
+      return convertHueLightToLight(light, key);
     });
     return { lights };
   } catch (err) {
