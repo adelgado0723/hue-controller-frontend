@@ -1,7 +1,10 @@
 <script lang="ts">
-	import type { Light } from './Light';
+	import LightRow from '$lib/components/LightRow/LightRow.svelte';
+	import type { Light as ILight } from '$lib/components/Light/Light';
+
+	import type { Light } from '../Light/Light';
 	import type RequestInit from 'http';
-	import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte';
+	/* import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte'; */
 	import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
 	import type { UpdateLightRequest } from '$lib/types';
 	import { error } from '@sveltejs/kit';
@@ -83,47 +86,25 @@
 	    throw error(500, 'Error updating light');
 	  }
 	}
+	export let lightData: ILight[] = [];
 </script>
 
-<div class="card w-96 bg-neutral text-neutral-content">
-	<div class="card-body items-center text-center">
-		<h2 class="card-title">{light.name}</h2>
-		<p>name: {light.name}</p>
-		<p>id: {light.id}</p>
-		<p>type: {light.type}</p>
-		<p>color:</p>
-		<ul>
-			<li>
-				<p>x: {light.color?.xy?.x}</p>
-				<p>y: {light.color?.xy?.y}</p>
-			</li>
-		</ul>
-		<div class="card-actions  flex w-full flex-col items-center justify-center pt-3">
-			<div class="flex gap-2">
-				<span>power:</span>
-				<input
-					type="checkbox"
-					class="toggle-secondary toggle"
-					checked={on}
-					on:click={handleToggleClick}
-				/>
-			</div>
-		</div>
-		<div class="card-actions  flex w-full flex-col items-center justify-center pt-3">
-			<div class="flex gap-2">
-				<span>brightness:</span>
-				<input
-					type="range"
-          min="1"
-					max="254"
-					on:input={handleBrightnessChange}
-					on:change={updateBrightness}
-					bind:value={brightness}
-					class="range range-xs {on ? 'range-warning' : 'disabled'}"
-					disabled={!on}
-				/>
-			</div>
-		</div>
-		<LightModal {light} />
-	</div>
+<div class="overflow-x-auto">
+	<table class="table-zebra w-full">
+		<thead>
+			<tr>
+				<th>💡</th>
+				<th>id</th>
+				<th>name</th>
+				<th>type</th>
+				<th>color</th>
+				<th>brightness</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#each lightData as light}
+				<LightRow {light} />
+			{/each}
+		</tbody>
+	</table>
 </div>

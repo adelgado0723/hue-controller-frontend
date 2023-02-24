@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Light } from './Light';
+	import type { Light } from '../Light/Light';
 	import type RequestInit from 'http';
-	import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte';
+	/* import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte'; */
 	import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
 	import type { UpdateLightRequest } from '$lib/types';
 	import { error } from '@sveltejs/kit';
@@ -85,45 +85,29 @@
 	}
 </script>
 
-<div class="card w-96 bg-neutral text-neutral-content">
-	<div class="card-body items-center text-center">
-		<h2 class="card-title">{light.name}</h2>
-		<p>name: {light.name}</p>
-		<p>id: {light.id}</p>
-		<p>type: {light.type}</p>
-		<p>color:</p>
-		<ul>
-			<li>
-				<p>x: {light.color?.xy?.x}</p>
-				<p>y: {light.color?.xy?.y}</p>
-			</li>
-		</ul>
-		<div class="card-actions  flex w-full flex-col items-center justify-center pt-3">
-			<div class="flex gap-2">
-				<span>power:</span>
-				<input
-					type="checkbox"
-					class="toggle-secondary toggle"
-					checked={on}
-					on:click={handleToggleClick}
-				/>
-			</div>
-		</div>
-		<div class="card-actions  flex w-full flex-col items-center justify-center pt-3">
-			<div class="flex gap-2">
-				<span>brightness:</span>
-				<input
-					type="range"
-          min="1"
-					max="254"
-					on:input={handleBrightnessChange}
-					on:change={updateBrightness}
-					bind:value={brightness}
-					class="range range-xs {on ? 'range-warning' : 'disabled'}"
-					disabled={!on}
-				/>
-			</div>
-		</div>
-		<LightModal {light} />
-	</div>
-</div>
+<tr>
+	<td>
+		<input
+			type="checkbox"
+			class="toggle-secondary toggle"
+			checked={on}
+			on:click={handleToggleClick}
+		/>
+	</td>
+	<td>{light.id}</td>
+	<td>{light.name}</td>
+	<td>{light.type}</td>
+	<td>{`X=${light.color.xy.x}, Y=${light.color.xy.y}`}</td>
+	<td>
+		<input
+			type="range"
+			min="1"
+			max="254"
+			on:input={handleBrightnessChange}
+			on:change={updateBrightness}
+			bind:value={brightness}
+			class="range range-xs {on ? 'range-warning' : 'disabled'}"
+			disabled={!on}
+		/>
+	</td>
+</tr>
