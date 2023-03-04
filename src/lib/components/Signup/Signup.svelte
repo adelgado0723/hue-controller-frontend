@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance, applyAction } from '$app/forms';
-	import { AlertType } from '$lib/types';
+	import { AlertType } from '$lib/constants';
 	import Alert from '$lib/components/Alert.svelte';
 	import type { SignupFormResponse } from './Signup';
 	export let form: SignupFormResponse;

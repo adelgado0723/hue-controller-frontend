@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import type { HueScene, HueScenes } from '$lib/types';
+import type { HueScene, HueScenes } from '$lib/types/hue';
 import type { Scene } from '$lib/components/Scene/Scene';
 import { error } from '@sveltejs/kit';
 import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';

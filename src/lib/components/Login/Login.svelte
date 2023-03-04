@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance, applyAction } from '$app/forms';
 	import type { LoginFormResponse } from './Login';
-	import { AlertType } from '$lib/types';
+	import { AlertType } from '$lib/types/constants';
 	import Alert from '$lib/components/Alert.svelte';
 	export let form: LoginFormResponse;
 	let errorMessage: string;

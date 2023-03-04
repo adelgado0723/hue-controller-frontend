@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AlertType } from '$lib/types';
+	import { AlertType } from '$lib/constants';
 	export let message: string;
 	export let type: string;
 	if (!type) {

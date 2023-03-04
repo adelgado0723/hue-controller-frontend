@@ -13,5 +13,5 @@
 	}
 </script>
 
-<h1 class="text-lg">Lights</h1>
+<h2 class="m-2 text-3xl text-purple-400" >Lights</h2>
 <LightRowList {lightData} />

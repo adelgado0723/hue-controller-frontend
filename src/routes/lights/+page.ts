@@ -1,7 +1,7 @@
 import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
 import type { Light } from '$lib/components/Light/Light';
 import { convertHueLightToLight } from '$lib/hue';
-import type { HueLight, HueLights } from '$lib/types';
+import type { HueLight, HueLights } from '$lib/types/hue';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 

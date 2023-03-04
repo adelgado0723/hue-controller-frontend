@@ -1,4 +1,3 @@
-
 export const enum AlertType {
   Success = 'success',
   Error = 'error',
