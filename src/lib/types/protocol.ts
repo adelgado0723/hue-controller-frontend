@@ -17,3 +17,13 @@ export type GroupRow = {
   type: string;
   action: GroupAction;
 }
+
+export type Groups = {
+  all: GroupRow[];
+  rooms: GroupRow[];
+  zones: GroupRow[];
+  luminaires: GroupRow[];
+  lightSources: GroupRow[];
+  lightGroups: GroupRow[];
+  entertainment: GroupRow[];
+};

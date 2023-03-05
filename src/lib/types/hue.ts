@@ -1,4 +1,4 @@
-export type UpdateLightRequest = {
+export type HueUpdateLightRequest = {
   on: boolean;
   bri: number;
   hue: number;
@@ -116,13 +116,48 @@ export type HueGroupAction = {
   colormode: string;
 };
 
+export type HueGroupType =
+  | 'LightGroup'
+  | 'Room'
+  | 'Entertainment'
+  | 'Zone'
+  | 'Luminaire'
+  | 'LightSource'
+  | '0';
+
 export type HueGroup = {
   name: string;
   lights: string[];
-  type: string;
+  type: HueGroupType;
   action: HueGroupAction;
 };
 
 export type HueGroups = {
   [id: string]: HueGroup;
 };
+
+export type HueUpdateGroupRequest = {
+  on?: boolean;
+  bri?: number;
+  hue?: number;
+  sat?: number;
+  xy?: [number, number];
+  ct?: number;
+  alert?: 'none' | 'select' | 'lselect';
+  effect?: 'none' | 'colorloop';
+  colormode?: 'hs' | 'xy' | 'ct';
+  transitiontime?: number; // defaults to 4 (400ms)
+  bri_inc?: number; // -254 to 254
+  sat_inc?: number; // -254 to 254
+  hue_inc?: number; // -65534 to 65534
+  ct_inc?: number; // -65534 to -65534
+  xy_inc?: [number, number]; // -0.5 to 0.5
+  scene?: string; // scene id
+};
+
+export type HueUpdateGroupResponse = [
+  success: {
+    address: string;
+    value: any;
+  },
+];

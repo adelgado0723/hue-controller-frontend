@@ -3,7 +3,7 @@
   import type RequestInit from 'http';
   /* import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte'; */
   import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
-  import type { UpdateLightRequest } from '$lib/types/hue';
+  import type { HueUpdateLightRequest } from '$lib/types/hue';
   import { error } from '@sveltejs/kit';
 
   export let light: Light = {
@@ -25,9 +25,8 @@
   const repeatIntervalMS = 150;
 
   async function handleToggleClick() {
-    on = !on;
-    const req: Partial<UpdateLightRequest> = {
-      on,
+    const req: Partial<HueUpdateLightRequest> = {
+      on: !on,
     };
 
     try {
@@ -45,6 +44,7 @@
       if (!data) {
         throw error(500, 'No data returned from bridge');
       }
+      on = !on;
       return data;
     } catch (err) {
       throw error(500, 'Error updating light');
@@ -59,7 +59,7 @@
   }
 
   async function updateBrightness() {
-    const req: Partial<UpdateLightRequest> = {
+    const req: Partial<HueUpdateLightRequest> = {
       bri: brightness,
     };
 
@@ -87,12 +87,7 @@
 
 <tr class="text-center">
   <td>
-    <input
-      type="checkbox"
-      class="toggle-accent toggle"
-      checked={on}
-      on:click={handleToggleClick}
-    />
+    <input type="checkbox" class="toggle-accent toggle" checked={on} on:click={handleToggleClick} />
   </td>
   <td>{light.id}</td>
   <td>{light.name}</td>

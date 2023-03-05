@@ -1,14 +1,17 @@
 import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
 import type { Light } from '$lib/components/Light/Light';
-import type { GroupRow } from '$lib/components/GroupRow/GroupRow';
+import type { GroupRow, Groups } from '$lib/types/protocol';
 import { convertHueLightToLight } from '$lib/hue';
 import type { HueLight, HueLights, HueGroups } from '$lib/types/hue';
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+import type { PageLoad, PageData } from './$types';
+import { GroupType } from '$lib/constants';
 
 export const ssr = false;
 
-export const load: PageLoad = (async () => {
+export const load: PageLoad = (async (): Promise<
+PageData | { lights: Light[]; groups: Groups }
+> => {
   try {
     const opts = {
       method: 'GET',
@@ -37,10 +40,20 @@ export const load: PageLoad = (async () => {
     if (!groupData) {
       throw error(500, 'No group data returned from bridge');
     }
-    const groups = Object.keys(groupData).map((key): GroupRow => {
+    const allGroups = Object.keys(groupData).map((key): GroupRow => {
       return { id: key, ...groupData[key] };
     });
 
+    // break up groups
+    const groups: Groups = {
+      all: allGroups,
+      rooms: allGroups?.filter((group) => group?.type === GroupType.room),
+      zones: allGroups?.filter((group) => group?.type === GroupType.zone),
+      luminaires: allGroups?.filter((group) => group?.type === GroupType.luminaire),
+      lightGroups: allGroups?.filter((group) => group?.type === GroupType.lightGroup),
+      lightSources: allGroups?.filter((group) => group?.type === GroupType.lightSource),
+      entertainment: allGroups?.filter((group) => group?.type === GroupType.entertainment),
+    };
     return { lights, groups };
   } catch (err) {
     return { error: 'Failed to load lights' };

@@ -4,7 +4,7 @@
   import type RequestInit from 'http';
   /* import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte'; */
   import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
-  import type { UpdateLightRequest } from '$lib/types/hue';
+  import type { HueUpdateLightRequest } from '$lib/types/hue';
   import { error } from '@sveltejs/kit';
 
   export let light: Light = {
@@ -27,7 +27,7 @@
 
   async function handleToggleClick() {
     on = !on;
-    const req: Partial<UpdateLightRequest> = {
+    const req: Partial<HueUpdateLightRequest> = {
       on,
     };
 
@@ -60,7 +60,7 @@
   }
 
   async function updateBrightness() {
-    const req: Partial<UpdateLightRequest> = {
+    const req: Partial<HueUpdateLightRequest> = {
       bri: brightness,
     };
 
