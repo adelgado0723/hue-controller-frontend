@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Light } from '$lib/components/Light/Light';
+  import type { Light } from '$lib/types/protocol';
 
   export let light: Light = {
     name: '',

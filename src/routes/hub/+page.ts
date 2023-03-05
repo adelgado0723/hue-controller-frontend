@@ -1,5 +1,5 @@
 import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
-import type { Light } from '$lib/components/Light/Light';
+import type { Light } from '$lib/types/protocol';
 import type { GroupRow, Groups } from '$lib/types/protocol';
 import { convertHueLightToLight } from '$lib/hue';
 import type { HueLight, HueLights, HueGroups } from '$lib/types/hue';

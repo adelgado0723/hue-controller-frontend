@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Light } from '$lib/components/Light/Light';
+  import type { Light } from '$lib/types/protocol';
   import type RequestInit from 'http';
   /* import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte'; */
   import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';

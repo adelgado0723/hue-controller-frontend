@@ -1,13 +1,13 @@
 <script lang="ts">
   import GroupRow from '$lib/components/GroupRow/GroupRow.svelte';
 
-  import type { GroupRow as IGroupRow } from '$lib/components/GroupRow/Group';
+  import type { GroupRow as IGroupRow } from '$lib/types/protocol';
   /* import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte'; */
 
   export let groupData: IGroupRow[] = [];
 </script>
 
-<div class="overflow-x-auto rounded-lg border-2 border-slate-400 shadow-lg">
+<div class="m-2 overflow-x-auto rounded-xl shadow-lg">
   <table class="table-zebra w-full">
     <thead>
       <tr class="text-xl text-secondary">

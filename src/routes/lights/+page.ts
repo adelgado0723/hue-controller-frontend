@@ -1,5 +1,5 @@
 import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
-import type { Light } from '$lib/components/Light/Light';
+import type { Light } from '$lib/types/protocol';
 import { convertHueLightToLight } from '$lib/hue';
 import type { HueLight, HueLights } from '$lib/types/hue';
 import { error } from '@sveltejs/kit';
@@ -13,7 +13,10 @@ export const load: PageLoad = (async () => {
       method: 'GET',
     };
 
-    const res = await fetch(`http://${PUBLIC_BRIDGE_IP}/api/${PUBLIC_BRIDGE_USERNAME}/lights`, opts);
+    const res = await fetch(
+      `http://${PUBLIC_BRIDGE_IP}/api/${PUBLIC_BRIDGE_USERNAME}/lights`,
+      opts,
+    );
 
     const data: HueLights = await res.json();
     if (!data) {

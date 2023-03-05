@@ -1,6 +1,6 @@
 <script lang="ts">
   import LightRow from '$lib/components/LightRow/LightRow.svelte';
-  import type { Light } from '../Light/Light';
+  import type { Light } from '$lib/types/protocol';
   import type RequestInit from 'http';
   /* import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte'; */
   import { PUBLIC_BRIDGE_IP, PUBLIC_BRIDGE_USERNAME } from '$env/static/public';
@@ -87,7 +87,7 @@
   export let lightData: Light[] = [];
 </script>
 
-<div class="overflow-x-auto rounded-lg border-2 border-slate-400 shadow-lg">
+<div class="m-2 overflow-x-auto rounded-xl shadow-lg">
   <table class="table-zebra w-full">
     <thead>
       <tr class="text-xl text-secondary">

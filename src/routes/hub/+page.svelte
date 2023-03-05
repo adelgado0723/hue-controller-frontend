@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Light } from '$lib/components/Light/Light';
+  import type { Light } from '$lib/types/protocol';
   import LightRowList from '$lib/components/LightRowList/LightRowList.svelte';
   import GroupRowList from '$lib/components/GroupRowList/GroupRowList.svelte';
   import type { PageData } from './$types';
@@ -31,7 +31,7 @@
   }
 </script>
 
-<div class="tabs">
+<div class="tabs m-2">
   <button
     on:click={() => {
       handleTabClick('all');

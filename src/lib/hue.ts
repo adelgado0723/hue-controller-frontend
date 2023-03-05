@@ -1,4 +1,4 @@
-import type { Light } from '$lib/components/Light/Light';
+import type { Light } from '$lib/types/protocol';
 import type { HueLight } from '$lib/types/hue';
 
 export function convertHueLightToLight(light: HueLight, id: string): Light {
