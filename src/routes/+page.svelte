@@ -10,7 +10,7 @@
 		<div class="max-w-md text-white">
 			<h1 class="mb-5 text-5xl font-bold">Welcome to the hub...</h1>
 			<p class="mb-5">Fine grain control of hue smart home devices at your fingertips.</p>
-			<button class="btn-primary btn">Get Started</button>
+			<a class="btn-primary btn" href="/hub">Get Started</a>
 		</div>
 	</div>
 </div>

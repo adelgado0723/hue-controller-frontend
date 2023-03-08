@@ -1,8 +1,10 @@
 <script lang="ts">
-  import LightRow from '$lib/components/LightRow/LightRow.svelte';
-  import type { Light } from '$lib/types/protocol';
+  import GroupRow from '$lib/components/GroupRow/GroupRow.svelte';
 
-  export let lightData: Light[] = [];
+  import type { GroupRow as IGroupRow } from '$lib/types/protocol';
+  /* import LightModal from '$lib/components/Modals/LightModal/LightModal.svelte'; */
+
+  export let groupData: IGroupRow[] = [];
 </script>
 
 <div class="m-2 overflow-x-auto">
@@ -18,8 +20,8 @@
       </tr>
     </thead>
     <tbody>
-      {#each lightData as light}
-        <LightRow {light} />
+      {#each groupData as group}
+        <GroupRow {group} />
       {/each}
     </tbody>
   </table>

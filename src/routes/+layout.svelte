@@ -8,7 +8,7 @@
 <div class="min-h-full">
 	<nav class="navbar bg-base-100 border-b">
 		<div class="flex-1">
-			<a class="btn btn-ghost normal-case text-xl" href="/">Hue Hub</a>
+			<a class="btn btn-ghost normal-case text-3xl" href="/">Hue Hub</a>
 		</div>
 
 		{#if !data.user}

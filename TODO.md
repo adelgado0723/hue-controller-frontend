@@ -15,3 +15,5 @@
   - [ ] Change Username
 
 - [ ] figure out global state and pass light back up to lightlist for modal logic
+
+- [ ] re-fetch light and group data when a group is turned on/off as multiple state changes could have occurred

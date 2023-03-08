@@ -2,7 +2,7 @@
 	import { enhance, applyAction } from '$app/forms';
 	import type { ResetPasswordFormResponse } from './ResetPassword';
 	import Alert from '$lib/components/Alert.svelte';
-	import { AlertType } from '$lib/types';
+	import { AlertType } from '$lib/constants';
 	export let form: ResetPasswordFormResponse ;
 	let errMessage: string;
 </script>
