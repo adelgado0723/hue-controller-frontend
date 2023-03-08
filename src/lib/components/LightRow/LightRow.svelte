@@ -25,44 +25,24 @@
   const repeatIntervalMS = 150;
 
   async function handleToggleClick() {
-    const req: Partial<HueUpdateLightRequest> = {
-      on: !on,
-    };
-
-    try {
-      const opts: RequestInit = {
-        method: 'PUT',
-      };
-
-      opts.body = JSON.stringify(req);
-      const res = await fetch(
-        `http://${PUBLIC_BRIDGE_IP}/api/${PUBLIC_BRIDGE_USERNAME}/lights/${light.id}/state`,
-        opts,
-      );
-
-      const data = await res.json();
-      if (!data) {
-        throw error(500, 'No data returned from bridge');
-      }
-      on = !on;
-      return data;
-    } catch (err) {
-      throw error(500, 'Error updating light');
-    }
+    if (!light.id) return;
+    await updateLightState({ on: !on });
+    on = !on;
   }
 
   async function handleBrightnessChange() {
-    if (withinRepeatInterval) return;
+    if (!light.id || withinRepeatInterval) return;
     withinRepeatInterval = true;
-    await updateBrightness();
+    await updateLightState({ bri: brightness });
     setTimeout(() => (withinRepeatInterval = false), repeatIntervalMS);
   }
 
   async function updateBrightness() {
-    const req: Partial<HueUpdateLightRequest> = {
-      bri: brightness,
-    };
+    if (!light.id) return;
+    await updateLightState({ bri: brightness });
+  }
 
+  async function updateLightState(req: Partial<HueUpdateLightRequest>) {
     try {
       const opts: RequestInit = {
         method: 'PUT',

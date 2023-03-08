@@ -7,7 +7,7 @@
   export let groupData: IGroupRow[] = [];
 </script>
 
-<div class="m-2 overflow-x-auto rounded-xl shadow-lg">
+<div class="m-2 overflow-x-auto">
   <table class="table-zebra w-full">
     <thead>
       <tr class="text-xl text-secondary">

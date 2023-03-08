@@ -7,6 +7,7 @@
 
   type Tab =
     | 'all'
+    | 'allGroups'
     | 'rooms'
     | 'zones'
     | 'lightGroups'
@@ -19,6 +20,7 @@
   let groupData: Groups | null = data.groups;
   let activeTab: Tab = 'all';
 
+  const groupDataExists = !!groupData?.all && groupData.all.length > 0;
   const roomsDataExists = !!groupData?.rooms && groupData.rooms.length > 0;
   const zonesDataExists = !!groupData?.zones && groupData.zones.length > 0;
   const lightGroupsDataExists = !!groupData?.lightGroups && groupData.lightGroups.length > 0;
@@ -31,103 +33,121 @@
   }
 </script>
 
-<div class="tabs m-2">
-  <button
-    on:click={() => {
-      handleTabClick('all');
-    }}
-    class="tabs-bordered tab text-2xl text-primary {activeTab === 'all'
-      ? 'tab-active underline'
-      : ''}"
-  >
-    All
-  </button>
-  {#if roomsDataExists}
+<div class="m-4 w-full flex flex-row items-center justify-center">
+  <div class="tabs m-2">
     <button
       on:click={() => {
-        handleTabClick('rooms');
+        handleTabClick('all');
       }}
-      class="tabs-bordered tab text-2xl text-primary {activeTab === 'rooms'
+      class="tabs-bordered tab text-2xl text-primary {activeTab === 'all'
         ? 'tab-active underline'
         : ''}"
     >
-      Rooms
+      Lights
     </button>
-  {/if}
-  {#if zonesDataExists}
-    <button
-      on:click={() => {
-        handleTabClick('zones');
-      }}
-      class="tabs-bordered tab text-2xl text-primary {activeTab === 'zones'
-        ? 'tab-active underline'
-        : ''}"
-    >
-      Zones
-    </button>
-  {/if}
-  {#if lightGroupsDataExists}
-    <button
-      on:click={() => {
-        handleTabClick('lightGroups');
-      }}
-      class="tabs-bordered tab text-2xl text-primary {activeTab === 'lightGroups'
-        ? 'tab-active underline'
-        : ''}"
-    >
-      Light Groups
-    </button>
-  {/if}
-  {#if lightSourcesDataExists}
-    <button
-      on:click={() => {
-        handleTabClick('lightSources');
-      }}
-      class="tabs-bordered tab text-2xl text-primary {activeTab === 'lightSources'
-        ? 'tab-active underline'
-        : ''}"
-    >
-      Light Sources
-    </button>
-  {/if}
-  {#if luminairesDataExists}
-    <button
-      on:click={() => {
-        handleTabClick('luminaires');
-      }}
-      class="tabs-bordered tab text-2xl text-primary {activeTab === 'luminaires'
-        ? 'tab-active underline'
-        : ''}"
-    >
-      Luminaires
-    </button>
-  {/if}
-  {#if entertainmentDataExists}
-    <button
-      on:click={() => {
-        handleTabClick('entertainment');
-      }}
-      class="tabs-bordered tab text-2xl text-primary {activeTab === 'entertainment'
-        ? 'tab-active underline'
-        : ''}"
-    >
-      Entertainment
-    </button>
-  {/if}
+    {#if roomsDataExists}
+      <button
+        on:click={() => {
+          handleTabClick('rooms');
+        }}
+        class="tabs-bordered tab text-2xl text-primary {activeTab === 'rooms'
+          ? 'tab-active underline'
+          : ''}"
+      >
+        Rooms
+      </button>
+    {/if}
+    {#if zonesDataExists}
+      <button
+        on:click={() => {
+          handleTabClick('zones');
+        }}
+        class="tabs-bordered tab text-2xl text-primary {activeTab === 'zones'
+          ? 'tab-active underline'
+          : ''}"
+      >
+        Zones
+      </button>
+    {/if}
+    {#if lightGroupsDataExists}
+      <button
+        on:click={() => {
+          handleTabClick('lightGroups');
+        }}
+        class="tabs-bordered tab text-2xl text-primary {activeTab === 'lightGroups'
+          ? 'tab-active underline'
+          : ''}"
+      >
+        Light Groups
+      </button>
+    {/if}
+    {#if lightSourcesDataExists}
+      <button
+        on:click={() => {
+          handleTabClick('lightSources');
+        }}
+        class="tabs-bordered tab text-2xl text-primary {activeTab === 'lightSources'
+          ? 'tab-active underline'
+          : ''}"
+      >
+        Light Sources
+      </button>
+    {/if}
+    {#if luminairesDataExists}
+      <button
+        on:click={() => {
+          handleTabClick('luminaires');
+        }}
+        class="tabs-bordered tab text-2xl text-primary {activeTab === 'luminaires'
+          ? 'tab-active underline'
+          : ''}"
+      >
+        Luminaires
+      </button>
+    {/if}
+    {#if entertainmentDataExists}
+      <button
+        on:click={() => {
+          handleTabClick('entertainment');
+        }}
+        class="tabs-bordered tab text-2xl text-primary {activeTab === 'entertainment'
+          ? 'tab-active underline'
+          : ''}"
+      >
+        Entertainment
+      </button>
+    {/if}
+    {#if groupDataExists}
+      <button
+        on:click={() => {
+          handleTabClick('allGroups');
+        }}
+        class="tabs-bordered tab text-2xl text-primary {activeTab === 'allGroups'
+          ? 'tab-active underline'
+          : ''}"
+      >
+        All Groups
+      </button>
+    {/if}
+  </div>
 </div>
 
-{#if activeTab === 'all'}
-  <LightRowList {lightData} />
-{:else if activeTab === 'rooms' && roomsDataExists}
-  <GroupRowList groupData={groupData?.rooms} />
-{:else if activeTab === 'zones' && zonesDataExists}
-  <GroupRowList groupData={groupData?.zones} />
-{:else if activeTab === 'lightGroups' && lightGroupsDataExists}
-  <GroupRowList groupData={groupData?.lightGroups} />
-{:else if activeTab === 'lightSources' && lightSourcesDataExists}
-  <GroupRowList groupData={groupData?.lightSources} />
-{:else if activeTab === 'luminaires' && luminairesDataExists}
-  <GroupRowList groupData={groupData?.luminaires} />
-{:else if activeTab === 'entertainment' && entertainmentDataExists}
-  <GroupRowList groupData={groupData?.entertainment} />
-{/if}
+<div class="w-full rounded-md shadow-lg">
+  {#if activeTab === 'all'}
+    <LightRowList {lightData} />
+  {:else if activeTab === 'allGroups'}
+    <GroupRowList groupData={groupData?.all} />
+  {:else if activeTab === 'rooms' && roomsDataExists}
+    <GroupRowList groupData={groupData?.rooms} />
+  {:else if activeTab === 'zones' && zonesDataExists}
+    <GroupRowList groupData={groupData?.zones} />
+  {:else if activeTab === 'lightGroups' && lightGroupsDataExists}
+    <GroupRowList groupData={groupData?.lightGroups} />
+  {:else if activeTab === 'lightSources' && lightSourcesDataExists}
+    <GroupRowList groupData={groupData?.lightSources} />
+  {:else if activeTab === 'luminaires' && luminairesDataExists}
+    <GroupRowList groupData={groupData?.luminaires} />
+  {:else if activeTab === 'entertainment' && entertainmentDataExists}
+    <GroupRowList groupData={groupData?.entertainment} />
+  {/if}
+</div>
