@@ -2,14 +2,18 @@
   import Input from '$lib/components/Input/Input.svelte';
   import type { HueError } from '$lib/types/hue';
   import LoadingSpinner from '$lib/components/svg/LoadingSpinner/LoadingSpinner.svelte';
+
   let currentStep = 1;
-  let ip = '';
-  let errorGettingIP = false;
+  let errorGettingIP = true;
   let errorTestingIP = false;
   let unauthErrorOnTest = false;
+  let ip = '';
 
   async function testBridgeIP(ip: string) {
     if (!ip) return;
+    currentStep = 2;
+    errorTestingIP = false;
+    unauthErrorOnTest = false;
 
     try {
       const fetchRes = await fetch(`http://${ip}/api/newdeveloper`);
@@ -29,13 +33,13 @@
 
   async function handleGetBridgeIPButtonClick() {
     try {
+      errorGettingIP = false;
       const fetchRes = await fetch(`https://discovery.meethue.com/`);
       const res: { id: string; internalipaddress: string; port: number }[] = await fetchRes?.json();
       if (!res[0]?.internalipaddress) {
         errorGettingIP = true;
         return;
       }
-      ip = res[0]?.internalipaddress;
 
       const el = document.querySelector('#slide2');
       if (!el) return;
@@ -43,9 +47,8 @@
         behavior: 'smooth',
       });
 
-      await testBridgeIP(ip);
+      await testBridgeIP(res[0]?.internalipaddress);
     } catch (error) {
-      ip = 'error: ' + error;
       errorGettingIP = true;
     }
   }
@@ -85,15 +88,31 @@
             if you know what it is or try auto discovery again.
           </p>
           <div class="my-4 flex flex-row items-end justify-start gap-6 align-bottom">
-            <Input id="ip" label="Enter the bridge's IP address" type="text" required={true} />
+            <div class="form-control mb-2 w-full max-w-lg">
+              <label for="ip" class="font-meium label pb-1">
+                <span class="label-text">Enter the bridge's IP address</span>
+              </label>
+              <input
+                id="ip"
+                bind:value={ip}
+                type="text"
+                required={true}
+                class="input-bordered input w-full max-w-lg"
+              />
+            </div>
             <button
               class="btn-primary btn z-10 mb-2 text-xl normal-case "
-              on:click={() => {
-                const el = document.querySelector('#slide2');
-                if (!el) return;
-                el.scrollIntoView({
+              on:click={async () => {
+                if (!ip) return;
+                errorGettingIP = false;
+                const slide2 = document.querySelector('#slide2');
+                if (!slide2) return;
+                slide2.scrollIntoView({
                   behavior: 'smooth',
                 });
+
+                //TODO: add ip address validation here
+                await testBridgeIP(ip);
               }}
             >
               Submit IP
@@ -107,21 +126,28 @@
     <section
       class="step-2 fex-col card rounded-box m-5 flex w-full items-center justify-center gap-2 bg-base-300 p-10"
     >
-      <div class="conect-container-connect-to-bridge m-4">
+      <div class="m-4">
         <h1 class="mb-8 text-2xl">Testing IP Address</h1>
-        <div role="status" class="flex flex-col items-center justify-center">
-          <LoadingSpinner
-            classes={`h-28 w-28 ${
-              unauthErrorOnTest ? 'animate-spin' : ''
-            } fill-primary text-gray-200 dark:text-gray-600`}
-          />
-        </div>
-        {#if unauthErrorOnTest}
-          <h2>Successfully Discovered Your Bridge's IP 🎉</h2>
-          <p class="my-4">
-            You can now complete establishing a connection by pressing the button on the bridge and then
-            clicking the button below.
-          </p>{/if}
+        {#if !errorTestingIP || (errorTestingIP && unauthErrorOnTest)}
+          <div role="status" class="flex flex-col items-center justify-center">
+            <LoadingSpinner
+              class="h-36  w-36 {unauthErrorOnTest
+                ? 'text-primary'
+                : 'animate-spin dark:text-gray-600'} fill-primary"
+              ;
+              text={unauthErrorOnTest ? 'Success' : 'Testing...'}
+            />
+          </div>
+          {#if unauthErrorOnTest}
+            <h2>Successfully Discovered Your Bridge's IP 🎉</h2>
+            <p class="my-4">
+              You can now complete establishing a connection by pressing the button on the bridge
+              and then clicking the button below.
+            </p>
+          {/if}
+        {:else if errorTestingIP && !unauthErrorOnTest}
+          <h2>There was an error testing your bridge's IP</h2>
+        {/if}
       </div>
     </section>
     <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
