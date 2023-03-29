@@ -161,3 +161,9 @@ export type HueUpdateGroupResponse = [
     value: any;
   },
 ];
+
+export type HueError = {
+  type: number;
+  address: string;
+  description: string;
+};
