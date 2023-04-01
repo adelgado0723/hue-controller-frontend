@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Input from '$lib/components/Input/Input.svelte';
   import type { HueError } from '$lib/types/hue';
   import LoadingSpinner from '$lib/components/svg/LoadingSpinner/LoadingSpinner.svelte';
+  import HueBridge from '$lib/components/svg/HueBridge/HueBridge.svelte';
 
   let currentStep = 1;
-  let errorGettingIP = true;
+  let errorGettingIP = false;
   let errorTestingIP = false;
-  let unauthErrorOnTest = false;
+  let unauthErrorOnTest = true;
   let ip = '';
 
   async function testBridgeIP(ip: string) {
@@ -29,6 +29,10 @@
       errorTestingIP = true;
       return;
     }
+  }
+  async function handlePairBridgeButtonClick() {
+    if (!ip) return;
+    currentStep = 3;
   }
 
   async function handleGetBridgeIPButtonClick() {
@@ -65,15 +69,15 @@
 <div class="carousel w-full">
   <div id="slide1" class="carousel-item relative box-border w-full">
     <section
-      class="step-1 fex-col card rounded-box m-5 flex w-full items-center justify-center gap-2 bg-base-300 p-10"
+      class="step-1 fex-col card rounded-box m-5 flex w-full items-center justify-center gap-8 bg-base-300 p-10 text-center"
     >
-      <h1 class="mb-6 text-2xl">Enter Bridge's IP Address</h1>
+      <h1 class="mb-2 text-2xl">Enter Bridge's IP Address</h1>
       <p class="explain text-xl">
         Make sure you're connected to the same network as the bridge and not using a VPN.
       </p>
 
       <button
-        class="btn-primary btn z-10 text-2xl normal-case"
+        class="btn-primary btn z-10 text-xl normal-case"
         on:click={() => {
           handleGetBridgeIPButtonClick();
         }}
@@ -124,31 +128,37 @@
   </div>
   <div id="slide2" class="carousel-item relative w-full">
     <section
-      class="step-2 fex-col card rounded-box m-5 flex w-full items-center justify-center gap-2 bg-base-300 p-10"
+      class="step-2 fex-col card rounded-box m-5 flex w-full items-center justify-center gap-2 bg-base-300 p-10 text-center"
     >
-      <div class="m-4">
-        <h1 class="mb-8 text-2xl">Testing IP Address</h1>
-        {#if !errorTestingIP || (errorTestingIP && unauthErrorOnTest)}
-          <div role="status" class="flex flex-col items-center justify-center">
-            <LoadingSpinner
-              class="h-36  w-36 {unauthErrorOnTest
-                ? 'text-primary'
-                : 'animate-spin dark:text-gray-600'} fill-primary"
-              ;
-              text={unauthErrorOnTest ? 'Success' : 'Testing...'}
-            />
-          </div>
-          {#if unauthErrorOnTest}
-            <h2>Successfully Discovered Your Bridge's IP 🎉</h2>
-            <p class="my-4">
-              You can now complete establishing a connection by pressing the button on the bridge
-              and then clicking the button below.
+      <h1 class="mb-2 text-2xl">Preparing to Pair Bridge</h1>
+      {#if !errorTestingIP || (errorTestingIP && unauthErrorOnTest)}
+        <div role="status" class="z-10 flex flex-col items-center justify-center">
+          <LoadingSpinner
+            class="mb-4 w-40 transition-transform {unauthErrorOnTest
+              ? 'hover:scale-110 hover:cursor-pointer hover:text-primary'
+              : 'dark:text-gray-600'}"
+            ;
+            text={unauthErrorOnTest ? 'Pair Bridge' : 'Testing...'}
+            textStyles="text-l text-center {unauthErrorOnTest ? 'hover:text-primary' : ''}"
+            spinnerStyles="text-primary {unauthErrorOnTest
+              ? 'motion-safe:animate-pulse'
+              : 'animate-spin'}"
+            on:click={unauthErrorOnTest ? handlePairBridgeButtonClick : undefined}
+          />
+        </div>
+        {#if unauthErrorOnTest}
+          <h2 class="my-2 text-xl">🎉 Successfully Discovered Your Bridge's IP 🎉</h2>
+          <div class="flex w-96 flex-row items-center justify-center gap-10">
+            <HueBridge class="h-20 w-20" />
+            <p>
+              You can now complete establishing a connection by pressing the button on your hue
+              bridge device and then clicking "Pair Bridge" above.
             </p>
-          {/if}
-        {:else if errorTestingIP && !unauthErrorOnTest}
-          <h2>There was an error testing your bridge's IP</h2>
+          </div>
         {/if}
-      </div>
+      {:else if errorTestingIP && !unauthErrorOnTest}
+        <h2>There was an error testing your bridge's IP</h2>
+      {/if}
     </section>
     <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
       <a
