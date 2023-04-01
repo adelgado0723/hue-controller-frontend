@@ -1,17 +1,32 @@
 <script lang="ts">
-  import type { HueError } from '$lib/types/hue';
+  import type {
+    HueError,
+    HueErrorResponse,
+    HueSuccessResponse,
+    HueCreateUsernameSuccess,
+  } from '$lib/types/hue';
   import LoadingSpinner from '$lib/components/svg/LoadingSpinner/LoadingSpinner.svelte';
   import HueBridge from '$lib/components/svg/HueBridge/HueBridge.svelte';
 
   let currentStep = 1;
   let errorGettingIP = false;
+  let errorGettingUserName = false;
   let errorTestingIP = false;
-  let unauthErrorOnTest = true;
+  let unauthErrorOnTest = false;
   let ip = '';
+  let userName = '';
 
-  async function testBridgeIP(ip: string) {
+  async function testBridgeIP() {
     if (!ip) return;
-    currentStep = 2;
+
+    const slide2 = document.querySelector('#slide2');
+    if (slide2) {
+      slide2.scrollIntoView({
+        behavior: 'smooth',
+      });
+      currentStep = 2;
+    }
+
     errorTestingIP = false;
     unauthErrorOnTest = false;
 
@@ -23,16 +38,65 @@
         if (res[0].error?.type === 1 && res[0].error?.description === 'unauthorized user') {
           unauthErrorOnTest = true;
         }
-        return;
       }
     } catch (error) {
       errorTestingIP = true;
-      return;
+    } finally {
+      if (errorTestingIP && !unauthErrorOnTest) {
+        const slide1 = document.querySelector('#slide1');
+        if (slide1) {
+          slide1.scrollIntoView({
+            behavior: 'smooth',
+          });
+          currentStep = 1;
+        }
+      }
+      // TODO: Toast or notification error message and remove message from slide where error happened
     }
   }
+
   async function handlePairBridgeButtonClick() {
     if (!ip) return;
-    currentStep = 3;
+
+    const slide3 = document.querySelector('#slide3');
+    if (slide3) {
+      slide3.scrollIntoView({
+        behavior: 'smooth',
+      });
+      currentStep = 3;
+    }
+
+    errorGettingUserName = false;
+
+    try {
+      const fetchRes = await fetch(`http://${ip}/api`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ devicetype: 'hue-remote' }),
+      });
+
+      const res: HueErrorResponse | HueSuccessResponse<HueCreateUsernameSuccess> =
+        await fetchRes?.json();
+      if (!!(res as HueErrorResponse)[0]?.error) {
+        errorGettingUserName = true;
+      }
+      userName = (res as HueSuccessResponse<HueCreateUsernameSuccess>)[0]?.success?.username;
+    } catch (error) {
+      errorGettingUserName = true;
+    } finally {
+      // TODO: Toast or notification error message and remove message from slide where error happened
+      /* if (errorGettingUserName) { */
+      /*   const slide2 = document.querySelector('#slide2'); */
+      /*   if (slide2) { */
+      /*     slide2.scrollIntoView({ */
+      /*       behavior: 'smooth', */
+      /*     }); */
+      /*     currentStep = 2; */
+      /*   } */
+      /* } */
+    }
   }
 
   async function handleGetBridgeIPButtonClick() {
@@ -45,13 +109,8 @@
         return;
       }
 
-      const el = document.querySelector('#slide2');
-      if (!el) return;
-      el.scrollIntoView({
-        behavior: 'smooth',
-      });
-
-      await testBridgeIP(res[0]?.internalipaddress);
+      ip = res[0]?.internalipaddress;
+      await testBridgeIP();
     } catch (error) {
       errorGettingIP = true;
     }
@@ -60,9 +119,9 @@
 
 <div class="m-50 flex w-full flex-col items-center justify-center gap-10">
   <ul class="steps m-4 w-auto text-xl font-bold">
-    <li class="{currentStep >= 1 && 'step-primary'} step font-medium">Find Bridge's IP Address</li>
-    <li class="{currentStep >= 2 && 'step-primary'} step font-medium">Test IP Address</li>
-    <li class="{currentStep >= 3 && 'step-primary'} step font-medium">Establish Connection</li>
+    <li class="{currentStep >= 1 && 'step-primary'} step font-medium">Find IP Address</li>
+    <li class="{currentStep >= 2 && 'step-primary'} step font-medium">Pair Bridge</li>
+    <li class="{currentStep >= 3 && 'step-primary'} step font-medium">Test Connection</li>
   </ul>
 </div>
 
@@ -71,7 +130,7 @@
     <section
       class="step-1 fex-col card rounded-box m-5 flex w-full items-center justify-center gap-8 bg-base-300 p-10 text-center"
     >
-      <h1 class="mb-2 text-2xl">Enter Bridge's IP Address</h1>
+      <h1 class="mb-2 text-2xl">Discover Bridge's IP Address</h1>
       <p class="explain text-xl">
         Make sure you're connected to the same network as the bridge and not using a VPN.
       </p>
@@ -109,14 +168,8 @@
               on:click={async () => {
                 if (!ip) return;
                 errorGettingIP = false;
-                const slide2 = document.querySelector('#slide2');
-                if (!slide2) return;
-                slide2.scrollIntoView({
-                  behavior: 'smooth',
-                });
-
                 //TODO: add ip address validation here
-                await testBridgeIP(ip);
+                await testBridgeIP();
               }}
             >
               Submit IP
@@ -132,6 +185,15 @@
     >
       <h1 class="mb-2 text-2xl">Preparing to Pair Bridge</h1>
       {#if !errorTestingIP || (errorTestingIP && unauthErrorOnTest)}
+        {#if unauthErrorOnTest}
+          <h2 class="my-2 text-xl">🎉 IP Successfully Verified 🎉</h2>
+          <div class="flex w-96 flex-row items-center justify-center gap-10">
+            <HueBridge class="h-20 w-20" />
+            <h2 class="my-2 text-xl">
+              Press the button on your bridge and click 'Pair Bridge' to continue
+            </h2>
+          </div>
+        {/if}
         <div role="status" class="z-10 flex flex-col items-center justify-center">
           <LoadingSpinner
             class="mb-4 w-40 transition-transform {unauthErrorOnTest
@@ -140,42 +202,21 @@
             ;
             text={unauthErrorOnTest ? 'Pair Bridge' : 'Testing...'}
             textStyles="text-l text-center {unauthErrorOnTest ? 'hover:text-primary' : ''}"
-            spinnerStyles="text-primary {unauthErrorOnTest
-              ? 'motion-safe:animate-pulse'
+            spinnerStyles="fill-primary {unauthErrorOnTest
+              ? 'motion-safe:animate-pulse text-primary'
               : 'animate-spin'}"
-            on:click={unauthErrorOnTest ? handlePairBridgeButtonClick : undefined}
+            onclick={unauthErrorOnTest
+              ? async () => {
+                  console.log('clicked');
+                  await handlePairBridgeButtonClick();
+                }
+              : undefined}
           />
         </div>
-        {#if unauthErrorOnTest}
-          <h2 class="my-2 text-xl">🎉 Successfully Discovered Your Bridge's IP 🎉</h2>
-          <div class="flex w-96 flex-row items-center justify-center gap-10">
-            <HueBridge class="h-20 w-20" />
-            <p>
-              You can now complete establishing a connection by pressing the button on your hue
-              bridge device and then clicking "Pair Bridge" above.
-            </p>
-          </div>
-        {/if}
       {:else if errorTestingIP && !unauthErrorOnTest}
         <h2>There was an error testing your bridge's IP</h2>
       {/if}
     </section>
-    <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a
-        href="#slide1"
-        on:click={() => {
-          currentStep = 1;
-        }}
-        class="btn-circle btn">❮</a
-      >
-      <a
-        href="#slide3"
-        on:click={() => {
-          currentStep = 3;
-        }}
-        class="btn-circle btn">❯</a
-      >
-    </div>
   </div>
   <div id="slide3" class="carousel-item relative w-full">
     <section
@@ -183,16 +224,15 @@
     >
       <div class="conect-container-connect-to-bridge m-4">
         <h1 class="mb-6 text-2xl">Establish Connection</h1>
+
+        {#if !!userName}
+          <div>The bridge gave us a username: {userName}</div>
+        {/if}
+        {#if errorGettingUserName}
+          <div class="error">Error getting username</div>
+          <div class="error">Did you press the button on the bridge? 🤔</div>
+        {/if}
       </div>
     </section>
-    <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a
-        href="#slide2"
-        on:click={() => {
-          currentStep = 2;
-        }}
-        class="btn-circle btn">❮</a
-      >
-    </div>
   </div>
 </div>

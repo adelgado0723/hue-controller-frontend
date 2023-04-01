@@ -162,8 +162,14 @@ export type HueUpdateGroupResponse = [
   },
 ];
 
+export type HueErrorResponse = { error: HueError }[];
+export type HueSuccessResponse<t> = { success: t }[];
 export type HueError = {
   type: number;
   address: string;
   description: string;
+};
+
+export type HueCreateUsernameSuccess = {
+  username: string;
 };
